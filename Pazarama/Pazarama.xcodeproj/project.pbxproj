@@ -15,6 +15,11 @@
 		5441282F290742C7000A6194 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5441282E290742C7000A6194 /* Launch Screen.storyboard */; };
 		544128322907466D000A6194 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 544128312907466D000A6194 /* Lottie */; };
 		54412834290748A7000A6194 /* ecommerce.json in Resources */ = {isa = PBXBuildFile; fileRef = 54412833290748A7000A6194 /* ecommerce.json */; };
+		5441283629074A56000A6194 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283529074A56000A6194 /* TabBarController.swift */; };
+		5441283829074CF1000A6194 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283729074CF1000A6194 /* SearchController.swift */; };
+		5441283A29074FF4000A6194 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283929074FF4000A6194 /* LaunchViewController.swift */; };
+		5441283D29075120000A6194 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283C29075120000A6194 /* ProfileViewController.swift */; };
+		5441284029075222000A6194 /* ShoppingChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283F29075222000A6194 /* ShoppingChartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,11 @@
 		5441281E29073C99000A6194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5441282E290742C7000A6194 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		54412833290748A7000A6194 /* ecommerce.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ecommerce.json; sourceTree = "<group>"; };
+		5441283529074A56000A6194 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		5441283729074CF1000A6194 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		5441283929074FF4000A6194 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		5441283C29075120000A6194 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5441283F29075222000A6194 /* ShoppingChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingChartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +93,7 @@
 		5441282529073CA2000A6194 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				5441283B290750F0000A6194 /* Modals */,
 				5441282D29073CE6000A6194 /* ViewControllers */,
 				5441282C29073CDD000A6194 /* View */,
 			);
@@ -148,8 +159,20 @@
 			isa = PBXGroup;
 			children = (
 				5441281129073C98000A6194 /* HomeViewController.swift */,
+				5441283529074A56000A6194 /* TabBarController.swift */,
+				5441283729074CF1000A6194 /* SearchController.swift */,
+				5441283929074FF4000A6194 /* LaunchViewController.swift */,
+				5441283C29075120000A6194 /* ProfileViewController.swift */,
+				5441283F29075222000A6194 /* ShoppingChartViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5441283B290750F0000A6194 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,8 +253,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5441281229073C98000A6194 /* HomeViewController.swift in Sources */,
+				5441284029075222000A6194 /* ShoppingChartViewController.swift in Sources */,
+				5441283829074CF1000A6194 /* SearchController.swift in Sources */,
 				5441280E29073C98000A6194 /* AppDelegate.swift in Sources */,
 				5441281829073C98000A6194 /* Pazarama.xcdatamodeld in Sources */,
+				5441283629074A56000A6194 /* TabBarController.swift in Sources */,
+				5441283A29074FF4000A6194 /* LaunchViewController.swift in Sources */,
+				5441283D29075120000A6194 /* ProfileViewController.swift in Sources */,
 				5441281029073C98000A6194 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
