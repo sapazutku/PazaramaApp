@@ -13,6 +13,8 @@
 		5441281829073C98000A6194 /* Pazarama.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5441281629073C98000A6194 /* Pazarama.xcdatamodeld */; };
 		5441281A29073C99000A6194 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5441281929073C99000A6194 /* Assets.xcassets */; };
 		5441282F290742C7000A6194 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5441282E290742C7000A6194 /* Launch Screen.storyboard */; };
+		544128322907466D000A6194 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 544128312907466D000A6194 /* Lottie */; };
+		54412834290748A7000A6194 /* ecommerce.json in Resources */ = {isa = PBXBuildFile; fileRef = 54412833290748A7000A6194 /* ecommerce.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,7 @@
 		5441281929073C99000A6194 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5441281E29073C99000A6194 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5441282E290742C7000A6194 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		54412833290748A7000A6194 /* ecommerce.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ecommerce.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				544128322907466D000A6194 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +92,7 @@
 		5441282629073CA8000A6194 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				54412833290748A7000A6194 /* ecommerce.json */,
 				5441281929073C99000A6194 /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -163,6 +168,9 @@
 			dependencies = (
 			);
 			name = Pazarama;
+			packageProductDependencies = (
+				544128312907466D000A6194 /* Lottie */,
+			);
 			productName = Pazarama;
 			productReference = 5441280A29073C98000A6194 /* Pazarama.app */;
 			productType = "com.apple.product-type.application";
@@ -191,6 +199,9 @@
 				Base,
 			);
 			mainGroup = 5441280129073C98000A6194;
+			packageReferences = (
+				544128302907466D000A6194 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 5441280B29073C98000A6194 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -207,6 +218,7 @@
 			files = (
 				5441282F290742C7000A6194 /* Launch Screen.storyboard in Resources */,
 				5441281A29073C99000A6194 /* Assets.xcassets in Resources */,
+				54412834290748A7000A6194 /* ecommerce.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +431,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		544128302907466D000A6194 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		544128312907466D000A6194 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 544128302907466D000A6194 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5441281629073C98000A6194 /* Pazarama.xcdatamodeld */ = {
