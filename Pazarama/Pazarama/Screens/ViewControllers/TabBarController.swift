@@ -19,7 +19,7 @@ class TabBarController : UITabBarController {
         // View Controllers
                 viewControllers = [
                     createTabBarItem(tabBarTitle: "Home", tabBarImage: "house", viewController: HomeViewController()),
-                    createTabBarItem(tabBarTitle: "Search", tabBarImage: "magnifyingglass", viewController: SearchController()),
+                    createTabBarItem(tabBarTitle: "Category", tabBarImage: "square.stack.3d.up"  , viewController: CategoryViewController()),
                     createTabBarItem(tabBarTitle: "Shopping Chart", tabBarImage: "cart", viewController: ShoppingChartViewController()),
                     createTabBarItem(tabBarTitle: "Profile", tabBarImage: "person", viewController: ProfileViewController())
 
