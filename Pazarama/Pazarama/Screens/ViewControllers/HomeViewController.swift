@@ -74,10 +74,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func configureUI() {
         collectionView.backgroundColor = .white
         
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
 
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -119,7 +119,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // MARK: - Overrides
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.5, height: 200)
+        return CGSize(width: 200, height: 300)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -131,6 +131,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
         cell.lbl.text = popularProducts[indexPath.row].title
         cell.bg.downloadImage(from: URL(string: popularProducts[indexPath.row].image))
+        cell.price.text = String(popularProducts[indexPath.row].price) + " ₺"
         return cell
     }
 
