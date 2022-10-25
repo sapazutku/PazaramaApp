@@ -21,8 +21,7 @@ class LaunchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemIndigo
-        view.backgroundColor = .systemIndigo
+        view.backgroundColor = .white
         // image view
         view.addSubview(pazaramaImageView)
         pazaramaImageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -33,7 +32,7 @@ class LaunchViewController: UIViewController {
         animationView = LottieAnimationView(name: "loading")
         animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         // under the pazarama icon
-        animationView.center = CGPoint(x: pazaramaImageView.center.x, y: pazaramaImageView.center.y - 100)
+        animationView.center = CGPoint(x: pazaramaImageView.center.x, y: pazaramaImageView.center.y + 100)
         animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.play()

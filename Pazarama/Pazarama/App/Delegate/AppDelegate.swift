@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = HomeViewController()
         window.makeKeyAndVisible()
         self.window = window
+        
         return true
     }
 
