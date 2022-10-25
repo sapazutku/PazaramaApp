@@ -8,21 +8,8 @@
 import UIKit
 import Moya
 
-struct CustomData {
-    var title: String
-    var url: String
-    var backgroundImage: UIImage
-}
-
-class HomeViewController: UIViewController, UICollectionViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    fileprivate let data = [
-        CustomData(title: "The Islands!", url: "maxcodes.io/enroll", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        CustomData(title: "Subscribe to maxcodes boiiii!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandThree")),
-        CustomData(title: "StoreKit Course!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        CustomData(title: "Collection Views!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        CustomData(title: "MapKit!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandOne")),
-    ]
     
     
     //MARK: - Properties
@@ -31,7 +18,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     var products = [Product]()
     var popularProducts = [Product]()
     
-    fileprivate let collectionView:UICollectionView = {
+
+    // MARK: - UI Elements
+    private let collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -40,25 +29,61 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         return cv
     }()
 
+    private let topTitle : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Best Seller Products"
+        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        lbl.textColor = .black
+        return lbl
+    }()
+
 
     //MARK: - Lifecycle
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        var appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        self.navigationItem.standardAppearance = appearance
+        self.navigationItem.scrollEdgeAppearance = appearance
         view.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
         getProducts()
+        
+    }
+
+    override func viewWillAppear (_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        view.addSubview(collectionView)
+        view.addSubview(topTitle)
         configureUI()
     }
 
     func configureUI() {
         collectionView.backgroundColor = .white
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        
         collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
+
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        topTitle.frame = CGRect(x: 100, y: 100, width: 200, height: 20)
+
     }
 
     //MARK: - Methods
@@ -67,10 +92,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             switch result {
             case .success(let response):
                 do {
-                    let products = try JSONDecoder().decode([Product].self, from: response.data)
-                    self.products = products
+                    let res = try JSONDecoder().decode([Product].self, from: response.data)
+                    self.products = res
+                    self.findPopularProducts()
                 } catch {
                     print(error)
+                }
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
                 }
             case .failure(let error):
                 print(error)
@@ -84,22 +113,25 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
                 popularProducts.append(product)
             }
         }
+        
     }
-}
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2)
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count ?? .zero
-    }
+    // MARK: - Overrides
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/2.5, height: 200)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return popularProducts.count ?? .zero
+
+    }
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
-        cell.data = self.data[indexPath.item]
+        cell.lbl.text = popularProducts[indexPath.row].title
+        cell.bg.downloadImage(from: URL(string: popularProducts[indexPath.row].image))
         return cell
     }
+
 }
-
-
