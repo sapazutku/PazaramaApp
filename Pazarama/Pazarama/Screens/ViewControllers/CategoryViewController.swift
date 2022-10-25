@@ -7,15 +7,15 @@
 
 import UIKit
 
-class CategoryViewController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
+class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     // MARK: - Properties
 
-    private let categoryList: [Category] = [
-        Category(name: "Electronics", image: "electronics"),
-        Category(name: "Jewelery", image: "jewelery"),
-        Category(name: "Women", image: "womens"),
-        Category(name: "Men", image: "mens"),
+    private let categoryList: [CategoryModal] = [
+        CategoryModal(name: "Electronics", image: "electronics"),
+        CategoryModal(name: "Jewelery", image: "jewelery"),
+        CategoryModal(name: "Women", image: "womens"),
+        CategoryModal(name: "Men", image: "mens"),
         
     ]
 

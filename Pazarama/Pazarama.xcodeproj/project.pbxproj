@@ -22,7 +22,12 @@
 		5441284229075E68000A6194 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5441284129075E68000A6194 /* loading.json */; };
 		5441284429075F36000A6194 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5441284329075F36000A6194 /* Launch.storyboard */; };
 		5441284929076698000A6194 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441284829076698000A6194 /* CategoryCollectionViewCell.swift */; };
-		54B1D0AB29082D9E008864B9 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1D0AA29082D9E008864B9 /* Category.swift */; };
+		54B1D0AB29082D9E008864B9 /* CategoryModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1D0AA29082D9E008864B9 /* CategoryModal.swift */; };
+		54B1D0AE29084A64008864B9 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 54B1D0AD29084A64008864B9 /* Moya */; };
+		54B1D0B129084AB1008864B9 /* ProductsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1D0B029084AB1008864B9 /* ProductsAPI.swift */; };
+		54B1D0B3290853A1008864B9 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1D0B2290853A1008864B9 /* Product.swift */; };
+		54C9729F2908956D00558CA0 /* ProductCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9729E2908956D00558CA0 /* ProductCustomCell.swift */; };
+		54C972A22908973700558CA0 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C972A12908973700558CA0 /* UIImageView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +47,11 @@
 		5441284129075E68000A6194 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		5441284329075F36000A6194 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		5441284829076698000A6194 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
-		54B1D0AA29082D9E008864B9 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		54B1D0AA29082D9E008864B9 /* CategoryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModal.swift; sourceTree = "<group>"; };
+		54B1D0B029084AB1008864B9 /* ProductsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAPI.swift; sourceTree = "<group>"; };
+		54B1D0B2290853A1008864B9 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		54C9729E2908956D00558CA0 /* ProductCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCustomCell.swift; sourceTree = "<group>"; };
+		54C972A12908973700558CA0 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54B1D0AE29084A64008864B9 /* Moya in Frameworks */,
 				544128322907466D000A6194 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +145,8 @@
 		5441282929073CBC000A6194 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				54C972A02908972500558CA0 /* Extensions */,
+				54B1D0AF29084A9C008864B9 /* Network */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -158,6 +170,7 @@
 		5441282C29073CDD000A6194 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				54B1D0B42908571C008864B9 /* Home */,
 				54412845290763CD000A6194 /* Category */,
 			);
 			path = View;
@@ -179,7 +192,8 @@
 		5441283B290750F0000A6194 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
-				54B1D0AA29082D9E008864B9 /* Category.swift */,
+				54B1D0AA29082D9E008864B9 /* CategoryModal.swift */,
+				54B1D0B2290853A1008864B9 /* Product.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -190,6 +204,30 @@
 				5441284829076698000A6194 /* CategoryCollectionViewCell.swift */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		54B1D0AF29084A9C008864B9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				54B1D0B029084AB1008864B9 /* ProductsAPI.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		54B1D0B42908571C008864B9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				54C9729E2908956D00558CA0 /* ProductCustomCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		54C972A02908972500558CA0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				54C972A12908973700558CA0 /* UIImageView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +248,7 @@
 			name = Pazarama;
 			packageProductDependencies = (
 				544128312907466D000A6194 /* Lottie */,
+				54B1D0AD29084A64008864B9 /* Moya */,
 			);
 			productName = Pazarama;
 			productReference = 5441280A29073C98000A6194 /* Pazarama.app */;
@@ -241,6 +280,7 @@
 			mainGroup = 5441280129073C98000A6194;
 			packageReferences = (
 				544128302907466D000A6194 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				54B1D0AC29084A64008864B9 /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 5441280B29073C98000A6194 /* Products */;
 			projectDirPath = "";
@@ -270,17 +310,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54C972A22908973700558CA0 /* UIImageView+Extensions.swift in Sources */,
 				5441281229073C98000A6194 /* HomeViewController.swift in Sources */,
 				5441284029075222000A6194 /* ShoppingChartViewController.swift in Sources */,
+				54C9729F2908956D00558CA0 /* ProductCustomCell.swift in Sources */,
 				5441283829074CF1000A6194 /* CategoryViewController.swift in Sources */,
 				5441280E29073C98000A6194 /* AppDelegate.swift in Sources */,
 				5441281829073C98000A6194 /* Pazarama.xcdatamodeld in Sources */,
 				5441283629074A56000A6194 /* TabBarController.swift in Sources */,
+				54B1D0B129084AB1008864B9 /* ProductsAPI.swift in Sources */,
 				5441284929076698000A6194 /* CategoryCollectionViewCell.swift in Sources */,
 				5441283A29074FF4000A6194 /* LaunchViewController.swift in Sources */,
 				5441283D29075120000A6194 /* ProfileViewController.swift in Sources */,
 				5441281029073C98000A6194 /* SceneDelegate.swift in Sources */,
-				54B1D0AB29082D9E008864B9 /* Category.swift in Sources */,
+				54B1D0AB29082D9E008864B9 /* CategoryModal.swift in Sources */,
+				54B1D0B3290853A1008864B9 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +535,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		54B1D0AC29084A64008864B9 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -498,6 +550,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 544128302907466D000A6194 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		54B1D0AD29084A64008864B9 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54B1D0AC29084A64008864B9 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
 		};
 /* End XCSwiftPackageProductDependency section */
 
