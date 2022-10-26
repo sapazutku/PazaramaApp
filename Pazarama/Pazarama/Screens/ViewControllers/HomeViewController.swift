@@ -29,15 +29,26 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cv
     }()
 
+    // best seller title
     private let topTitle : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Best Seller Products"
-        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
         lbl.textColor = .black
         return lbl
     }()
 
+    // all products title
+    private let allProductsTitle : UILabel = {
+        let lbl = UILabel()
+        lbl.text = "All Products"
+        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        lbl.textColor = .black
+        return lbl
+    }()
+
+    
 
     //MARK: - Lifecycle
     
@@ -53,9 +64,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        var appearance = UINavigationBarAppearance()
+        let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
+        appearance.backgroundColor = .systemBackground
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
         view.backgroundColor = .systemBackground
@@ -68,21 +79,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         view.addSubview(collectionView)
         view.addSubview(topTitle)
+        view.addSubview(allProductsTitle)
         configureUI()
     }
 
     func configureUI() {
-        collectionView.backgroundColor = .white
-        
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-
+        // collection view
+        collectionView.backgroundColor = .systemBackground
+        collectionView.frame = CGRect(x: 20, y: 50, width: view.frame.width - 40, height: 300)
         collectionView.delegate = self
         collectionView.dataSource = self
-
-        topTitle.frame = CGRect(x: 100, y: 100, width: 200, height: 20)
+        // best seller title
+        topTitle.frame = CGRect(x: 20, y: 20, width: view.frame.width - 40, height: 30)
+        // all products title
+        allProductsTitle.frame = CGRect(x: 20, y: 350, width: view.frame.width - 40, height: 30)
 
     }
 
