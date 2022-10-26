@@ -8,21 +8,8 @@
 import UIKit
 import Moya
 
-struct CustomData {
-    var title: String
-    var url: String
-    var backgroundImage: UIImage
-}
-
-class HomeViewController: UIViewController, UICollectionViewDelegate {
+class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
-    fileprivate let data = [
-        CustomData(title: "The Islands!", url: "maxcodes.io/enroll", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        CustomData(title: "Subscribe to maxcodes boiiii!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandThree")),
-        CustomData(title: "StoreKit Course!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        CustomData(title: "Collection Views!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandZero")),
-        CustomData(title: "MapKit!", url: "maxcodes.io/courses", backgroundImage: #imageLiteral(resourceName: "islandOne")),
-    ]
     
     
     //MARK: - Properties
@@ -31,7 +18,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     var products = [Product]()
     var popularProducts = [Product]()
     
-    fileprivate let collectionView:UICollectionView = {
+
+    // MARK: - UI Elements
+    private let collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -40,25 +29,93 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         return cv
     }()
 
+    // best seller title
+    private let topTitle : UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Best Seller Products"
+        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        lbl.textColor = .black
+        return lbl
+    }()
+
+    // all products title
+    private let allProductsTitle : UILabel = {
+        let lbl = UILabel()
+        lbl.text = "All Products"
+        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        lbl.textColor = .black
+        return lbl
+    }()
+
+    // all collection view
+    private let allProductsCollectionView:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(ProductCustomCell.self, forCellWithReuseIdentifier: "cell")
+        return cv
+    }()
 
     //MARK: - Lifecycle
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        // navigation bar
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.backgroundColor = .systemBackground
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
+        self.navigationItem.standardAppearance = appearance
+        self.navigationItem.scrollEdgeAppearance = appearance
+        /*
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        */
+
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
         getProducts()
+        
+    }
+
+    override func viewWillAppear (_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.addSubview(collectionView)
+        view.addSubview(topTitle)
+        view.addSubview(allProductsTitle)
+        view.addSubview(allProductsCollectionView)
         configureUI()
     }
 
     func configureUI() {
-        collectionView.backgroundColor = .white
+
+        // best seller title
+        topTitle.frame = CGRect(x: 20, y: 50, width: view.frame.width - 40, height: 30)
+
+        // collection view
+        collectionView.backgroundColor = .systemBackground
+        collectionView.frame = CGRect(x: 20, y: 50, width: view.frame.width - 40, height: 300)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
+
+        // all products title
+        allProductsTitle.frame = CGRect(x: 20, y: 350, width: view.frame.width - 40, height: 30)
+
+        // all products collection view
+        allProductsCollectionView.backgroundColor = .systemBackground
+        allProductsCollectionView.frame = CGRect(x: 20, y: 380, width: view.frame.width - 40, height: 300)
+        allProductsCollectionView.delegate = self
+        allProductsCollectionView.dataSource = self
     }
 
     //MARK: - Methods
@@ -67,10 +124,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             switch result {
             case .success(let response):
                 do {
-                    let products = try JSONDecoder().decode([Product].self, from: response.data)
-                    self.products = products
+                    let res = try JSONDecoder().decode([Product].self, from: response.data)
+                    self.products = res
+                    self.findPopularProducts()
                 } catch {
                     print(error)
+                }
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.allProductsCollectionView.reloadData()
                 }
             case .failure(let error):
                 print(error)
@@ -84,22 +146,36 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
                 popularProducts.append(product)
             }
         }
+        
     }
-}
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2)
-    }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count ?? .zero
-    }
+    // MARK: - Overrides
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
-        cell.data = self.data[indexPath.item]
-        return cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 200, height: 300)
     }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.collectionView {
+            return popularProducts.count ?? .zero
+        } else {
+            return products.count ?? .zero
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
+            cell.lbl.text = popularProducts[indexPath.row].title
+            cell.bg.downloadImage(from: URL(string: popularProducts[indexPath.row].image))
+            cell.price.text = String(popularProducts[indexPath.row].price) + " ₺"
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
+            cell.lbl.text = products[indexPath.row].title
+            return cell
+        }
+    }
+
 }
-
-
