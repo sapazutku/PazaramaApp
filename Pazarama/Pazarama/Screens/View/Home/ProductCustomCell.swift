@@ -9,10 +9,21 @@ import UIKit
 
 
 class ProductCustomCell: UICollectionViewCell {
+
+    var product: Product? {
+        didSet {
+            guard let product = product else { return }
+            bg.downloadImage(from: URL(string: product.image)!)
+            lbl.text = product.title
+            price.text = String(product.price) + " ₺"
+            star.text = String(product.rating.rate) + " ⭐️"
+        }
+    }
     
-  
-    
-    let bg: UIImageView = {
+
+    // image
+
+    var bg: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
@@ -21,25 +32,43 @@ class ProductCustomCell: UICollectionViewCell {
         return iv
     }()
 
-    let lbl: UILabel = {
+    // title
+
+    var lbl: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
+        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
         lbl.textColor = .black
         lbl.textAlignment = .center
         return lbl
     }()
+
+    // $
     
-    let price: UILabel = {
+    var price: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
         lbl.textColor = .systemRed
         lbl.textAlignment = .center
         return lbl
     }()
 
-    let addToCart: UIButton = {
+    // star
+    var star: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.font = UIFont(name: "HelveticaNeue", size: 20)
+        lbl.textColor = .black
+        lbl.textAlignment = .center
+        return lbl
+    }()
+
+
+
+
+    // button
+    var addToCart: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Add to Cart", for: .normal)
@@ -65,11 +94,15 @@ class ProductCustomCell: UICollectionViewCell {
 
         // price
         contentView.addSubview(price)
-        price.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        price.frame = CGRect(x: 100, y: lbl.frame.origin.y + 20, width: 100, height: 100)
+
+        // star
+        contentView.addSubview(star)
+        star.frame = CGRect(x: 0, y: lbl.frame.origin.y + 20, width: 100, height: 100)
 
         // button
         contentView.addSubview(addToCart)
-        addToCart.frame = CGRect(x: 25, y: 250, width: 150, height: 40)
+        addToCart.frame = CGRect(x: 25, y: 300, width: 150, height: 40)
 
         // cell border
         contentView.layer.borderWidth = 1
