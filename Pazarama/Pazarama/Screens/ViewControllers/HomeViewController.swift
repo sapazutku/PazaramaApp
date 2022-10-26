@@ -48,15 +48,30 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return lbl
     }()
 
-    
+    // all collection view
+    private let allProductsCollectionView:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(ProductCustomCell.self, forCellWithReuseIdentifier: "cell")
+        return cv
+    }()
 
     //MARK: - Lifecycle
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-
+        // navigation bar
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.backgroundColor = .systemBackground
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
+        self.navigationItem.standardAppearance = appearance
+        self.navigationItem.scrollEdgeAppearance = appearance
+        /*
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.barTintColor = .white
@@ -64,11 +79,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .systemBackground
-        self.navigationItem.standardAppearance = appearance
-        self.navigationItem.scrollEdgeAppearance = appearance
+        
+        */
+
+        // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
         getProducts()
         
@@ -76,24 +90,32 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     override func viewWillAppear (_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         view.addSubview(collectionView)
         view.addSubview(topTitle)
         view.addSubview(allProductsTitle)
+        view.addSubview(allProductsCollectionView)
         configureUI()
     }
 
     func configureUI() {
+
+        // best seller title
+        topTitle.frame = CGRect(x: 20, y: 50, width: view.frame.width - 40, height: 30)
+
         // collection view
         collectionView.backgroundColor = .systemBackground
         collectionView.frame = CGRect(x: 20, y: 50, width: view.frame.width - 40, height: 300)
         collectionView.delegate = self
         collectionView.dataSource = self
-        // best seller title
-        topTitle.frame = CGRect(x: 20, y: 20, width: view.frame.width - 40, height: 30)
+
         // all products title
         allProductsTitle.frame = CGRect(x: 20, y: 350, width: view.frame.width - 40, height: 30)
 
+        // all products collection view
+        allProductsCollectionView.backgroundColor = .systemBackground
+        allProductsCollectionView.frame = CGRect(x: 20, y: 380, width: view.frame.width - 40, height: 300)
+        allProductsCollectionView.delegate = self
+        allProductsCollectionView.dataSource = self
     }
 
     //MARK: - Methods
@@ -110,6 +132,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 }
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.allProductsCollectionView.reloadData()
                 }
             case .failure(let error):
                 print(error)
@@ -133,16 +156,26 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return popularProducts.count ?? .zero
+        if collectionView == self.collectionView {
+            return popularProducts.count ?? .zero
+        } else {
+            return products.count ?? .zero
+        }
 
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
-        cell.lbl.text = popularProducts[indexPath.row].title
-        cell.bg.downloadImage(from: URL(string: popularProducts[indexPath.row].image))
-        cell.price.text = String(popularProducts[indexPath.row].price) + " ₺"
-        return cell
+        if collectionView == self.collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
+            cell.lbl.text = popularProducts[indexPath.row].title
+            cell.bg.downloadImage(from: URL(string: popularProducts[indexPath.row].image))
+            cell.price.text = String(popularProducts[indexPath.row].price) + " ₺"
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
+            cell.lbl.text = products[indexPath.row].title
+            return cell
+        }
     }
 
 }
