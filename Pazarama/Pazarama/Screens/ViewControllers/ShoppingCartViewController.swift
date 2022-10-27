@@ -9,12 +9,15 @@ import UIKit
 import SnapKit
 class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return shoppingCart.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartCell", for: indexPath) as! ShoppingCartCell
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! UITableViewCell
+               cell.textLabel?.text = shoppingCart[indexPath.row].title
+
+               cell.accessoryType = .disclosureIndicator
+               return cell
     }
     
     var shoppingCart: [ProductItem] = []
@@ -30,13 +33,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     }()
 
     // table
-    private let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(ShoppingCartCell.self, forCellReuseIdentifier: "ShoppingCartCell")
-        tableView.backgroundColor = .systemBackground
-        tableView.separatorStyle = .none
-        return tableView
-    }()
+    private let tableView = UITableView()
 
     // total item
     private let totalItemLabel: UILabel = {
@@ -80,6 +77,20 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Helpers
 
     func configureUI() {
+        // table view
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "shoppingCell")
+        tableView.rowHeight = 64
+        tableView.tableFooterView = UIView()
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-200)
+        }
         view.backgroundColor = .systemBackground
                 view.addSubview(titleLabel)
                 titleLabel.snp.makeConstraints { make in
@@ -87,13 +98,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                     make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(10)
                 }
 
-                view.addSubview(tableView)
-                tableView.snp.makeConstraints { make in
-                    make.top.equalTo(titleLabel.snp.bottom).offset(10)
-                    make.left.equalTo(view.safeAreaLayoutGuide.snp.left)
-                    make.right.equalTo(view.safeAreaLayoutGuide.snp.right)
-                    make.height.equalTo(300)
-                }
+                
 
                 view.addSubview(totalItemLabel)
                 totalItemLabel.snp.makeConstraints { make in
@@ -123,6 +128,11 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     func getAllProducts() {
         shoppingCart = Product.getAllProducts()
         print("Shopping Cart: \(shoppingCart)")
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.totalItemLabel.text = "Total Item: \(self.shoppingCart.count)"
+            self.totalPriceLabel.text = "Total Price: \(self.shoppingCart.reduce(0, { $0 + $1.price }))"
+        }
     }
     
 
