@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 class ProductCustomCell: UICollectionViewCell {
 
@@ -20,7 +20,6 @@ class ProductCustomCell: UICollectionViewCell {
         }
     }
     
-
     // image
 
     var bg: UIImageView = {
@@ -75,6 +74,7 @@ class ProductCustomCell: UICollectionViewCell {
         btn.setTitleColor(.white, for: .normal)
         btn.backgroundColor = .systemIndigo
         btn.layer.cornerRadius = 12
+        btn.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
         return btn
     }()
 
@@ -114,5 +114,11 @@ class ProductCustomCell: UICollectionViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Methods
+    @objc func addToCartAction() {
+        // TODO: Add Core Data
+        print("added")
     }
 }
