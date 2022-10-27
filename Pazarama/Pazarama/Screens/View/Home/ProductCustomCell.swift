@@ -119,6 +119,6 @@ class ProductCustomCell: UICollectionViewCell {
     // MARK: - Methods
     @objc func addToCartAction() {
         // TODO: Add Core Data
-        print("added")
+        Product.addProduct(product: product!)
     }
 }
