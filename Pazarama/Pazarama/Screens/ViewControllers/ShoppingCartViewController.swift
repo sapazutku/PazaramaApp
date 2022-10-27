@@ -17,7 +17,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
-
+    var shoppingCart: [ProductItem] = []
 
     // MARK: - Components
     // title
@@ -72,6 +72,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAllProducts()
         configureUI()
 
     }
@@ -116,7 +117,13 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         
     }
 
-    // MARK: - Ovveride
+    // MARK: - Methods
+
+    // get all products from core data
+    func getAllProducts() {
+        shoppingCart = Product.getAllProducts()
+        print("Shopping Cart: \(shoppingCart)")
+    }
     
 
     // MARK: - Selectors
@@ -124,6 +131,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     @objc func buyButtonTapped() {
         print("DEBUG: buy button tapped")
     }
+
+
 
 
     
