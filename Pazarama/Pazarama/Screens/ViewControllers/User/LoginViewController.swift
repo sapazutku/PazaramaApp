@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import Lottie
-class LoginController: UIViewController {
+class LoginViewController: UIViewController {
     
     // MARK: - Properties
 
@@ -198,8 +198,11 @@ class LoginController: UIViewController {
   */
 
     @objc func handleShowSignUp() {
-        //navigationController?.pushViewController(RegisterController(), animated: true)
-        print("Sign")
+        let controller = RegisterViewController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
+
+        
     }
     
     func goToMain(){
