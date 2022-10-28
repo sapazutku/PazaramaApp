@@ -2,7 +2,7 @@
 //  ProductItem+CoreDataClass.swift
 //  Pazarama
 //
-//  Created by utku on 27.10.2022.
+//  Created by utku on 28.10.2022.
 //
 //
 

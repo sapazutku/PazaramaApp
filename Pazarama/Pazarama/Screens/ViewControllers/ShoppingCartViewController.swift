@@ -52,7 +52,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
 
             // count label
             let countLabel = UILabel()
-            countLabel.text = "1"
+            countLabel.text = String(shoppingCart[indexPath.row].quantity)
             countLabel.textColor = .black
             countLabel.backgroundColor = .white
             countLabel.layer.cornerRadius = 10
