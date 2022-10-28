@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5400ED2A290B19500074FC50 /* ProductItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5400ED28290B19500074FC50 /* ProductItem+CoreDataClass.swift */; };
-		5400ED2B290B19500074FC50 /* ProductItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5400ED29290B19500074FC50 /* ProductItem+CoreDataProperties.swift */; };
 		5400ED2E290B1B880074FC50 /* Product+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5400ED2D290B1B880074FC50 /* Product+Extension.swift */; };
+		54205C66290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54205C65290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift */; };
+		54205C69290C781F000AB0C2 /* ProductItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54205C67290C781F000AB0C2 /* ProductItem+CoreDataClass.swift */; };
+		54205C6A290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54205C68290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift */; };
 		5441280E29073C98000A6194 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441280D29073C98000A6194 /* AppDelegate.swift */; };
 		5441281029073C98000A6194 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441280F29073C98000A6194 /* SceneDelegate.swift */; };
 		5441281229073C98000A6194 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441281129073C98000A6194 /* HomeViewController.swift */; };
@@ -41,9 +42,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5400ED28290B19500074FC50 /* ProductItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductItem+CoreDataClass.swift"; sourceTree = "<group>"; };
-		5400ED29290B19500074FC50 /* ProductItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5400ED2D290B1B880074FC50 /* Product+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Product+Extension.swift"; sourceTree = "<group>"; };
+		54205C65290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		54205C67290C781F000AB0C2 /* ProductItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		54205C68290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5441280A29073C98000A6194 /* Pazarama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pazarama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5441280D29073C98000A6194 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5441280F29073C98000A6194 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,8 +92,9 @@
 		5400ED2C290B195A0074FC50 /* ProductItem */ = {
 			isa = PBXGroup;
 			children = (
-				5400ED28290B19500074FC50 /* ProductItem+CoreDataClass.swift */,
-				5400ED29290B19500074FC50 /* ProductItem+CoreDataProperties.swift */,
+				54205C67290C781F000AB0C2 /* ProductItem+CoreDataClass.swift */,
+				54205C68290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift */,
+				54205C65290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift */,
 			);
 			path = ProductItem;
 			sourceTree = "<group>";
@@ -376,22 +379,23 @@
 			files = (
 				54C972A22908973700558CA0 /* UIImageView+Extensions.swift in Sources */,
 				5441281229073C98000A6194 /* HomeViewController.swift in Sources */,
+				54205C6A290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */,
+				54205C66290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */,
 				5441284029075222000A6194 /* ShoppingCartViewController.swift in Sources */,
 				54C9729F2908956D00558CA0 /* ProductCustomCell.swift in Sources */,
 				547829B72909FB690082778C /* LoginViewController.swift in Sources */,
 				54D84A8F2909E6C6009620AF /* UserDefaults+Extension.swift in Sources */,
-				5400ED2B290B19500074FC50 /* ProductItem+CoreDataProperties.swift in Sources */,
 				5441283829074CF1000A6194 /* CategoryViewController.swift in Sources */,
 				5441280E29073C98000A6194 /* AppDelegate.swift in Sources */,
 				547829B42909F9F20082778C /* ShoppingCart.swift in Sources */,
 				5441281829073C98000A6194 /* Pazarama.xcdatamodeld in Sources */,
 				5400ED2E290B1B880074FC50 /* Product+Extension.swift in Sources */,
+				54205C69290C781F000AB0C2 /* ProductItem+CoreDataClass.swift in Sources */,
 				5441283629074A56000A6194 /* TabBarController.swift in Sources */,
 				547829B92909FB7B0082778C /* RegisterViewController.swift in Sources */,
 				54B1D0B129084AB1008864B9 /* ProductsAPI.swift in Sources */,
 				5441284929076698000A6194 /* CategoryCollectionViewCell.swift in Sources */,
 				5441283A29074FF4000A6194 /* LaunchViewController.swift in Sources */,
-				5400ED2A290B19500074FC50 /* ProductItem+CoreDataClass.swift in Sources */,
 				5441283D29075120000A6194 /* ProfileViewController.swift in Sources */,
 				54D84A8D2909E5A1009620AF /* ShoppingCartCell.swift in Sources */,
 				5441281029073C98000A6194 /* SceneDelegate.swift in Sources */,

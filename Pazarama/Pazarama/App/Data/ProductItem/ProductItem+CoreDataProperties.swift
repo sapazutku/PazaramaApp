@@ -2,7 +2,7 @@
 //  ProductItem+CoreDataProperties.swift
 //  Pazarama
 //
-//  Created by utku on 27.10.2022.
+//  Created by utku on 28.10.2022.
 //
 //
 
@@ -16,9 +16,9 @@ extension ProductItem {
         return NSFetchRequest<ProductItem>(entityName: "ProductItem")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var image: String?
     @NSManaged public var price: Double
+    @NSManaged public var title: String?
+    @NSManaged public var quantity: Int16
 
 }
 

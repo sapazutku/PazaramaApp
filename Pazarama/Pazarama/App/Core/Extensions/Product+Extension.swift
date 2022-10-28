@@ -24,23 +24,49 @@ extension Product {
             return []
         }
     }
+
     // add product to core data
     static func addProduct(product: Product) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "ProductItem", in: context)
+        // control product is exist or not
+        for item in getAllProducts() {
+            if item.title == product.title {
+                item.quantity += 1
+                return
+            }
+        }
         let newProduct = NSManagedObject(entity: entity!, insertInto: context)
         newProduct.setValue(product.title, forKey: "title")
         newProduct.setValue(product.price, forKey: "price")
-        newProduct.setValue(product.image, forKey: "image")
-        
-        do {
-            try context.save()
-        } catch {
-            print("Failed saving")
-        }
+        newProduct.setValue(1, forKey: "quantity")
     }
 
     // delete product from core data
 
     
 }
+
+/*
+for item in products {
+            if item.title == product.title {
+                product.quantity += 1
+                return
+            }
+        }
+
+
+if let productItem = Product.getAllProducts().first(where: { $0.title == product.title }) {
+            productItem.quantity += 1
+        } else {
+            newProduct.setValue(product.title, forKey: "title")
+            newProduct.setValue(product.price, forKey: "price")
+            newProduct.setValue(1, forKey: "quantity")
+            do {
+                try context.save()
+            } catch {
+                print("Failed")
+            }
+        }
+*/
+
