@@ -22,11 +22,10 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     var filteredArray = [CategoryModal]()
 
     private let categoryList: [CategoryModal] = [
-        CategoryModal(name: "Electronics", image: "electronics"),
-        CategoryModal(name: "Jewelery", image: "jewelery"),
-        CategoryModal(name: "Women", image: "womens"),
-        CategoryModal(name: "Men", image: "mens"),
-        
+        CategoryModal(name: "electronics", image: "electronics"),
+        CategoryModal(name: "jewelery", image: "jewelery"),
+        CategoryModal(name: "women's clothing", image: "womens"),
+        CategoryModal(name: "men's clothing", image: "mens"),
     ]
 
     // MARK: - UI Elements
@@ -52,7 +51,11 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
-
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .systemBackground
+        self.navigationItem.standardAppearance = appearance
+        self.navigationItem.scrollEdgeAppearance = appearance
     }
 
     // MARK: - Helpers
@@ -94,6 +97,16 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ProductListViewController()
+        if searchController.isActive && searchController.searchBar.text != "" {
+            vc.category = filteredArray[indexPath.row].name
+        } else {
+            vc.category = categoryList[indexPath.row].name
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     

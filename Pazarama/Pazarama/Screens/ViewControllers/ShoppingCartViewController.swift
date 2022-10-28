@@ -168,11 +168,24 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     func getAllProducts() {
         shoppingCart = Product.getAllProducts()
         print("Shopping Cart: \(shoppingCart)")
+        reloadData()
+    }
+
+    // MARK: - Helpers
+    func reloadData(){
         DispatchQueue.main.async {
             self.tableView.reloadData()
             self.totalItemLabel.text = "Total Item: \(self.shoppingCart.count)"
-            self.totalPriceLabel.text = "Total Price: \(self.shoppingCart.reduce(0, { $0 + $1.price }))"
+            self.totalPriceLabel.text = "Total Price: \(self.calculateTotalPrice())"
         }
+    }
+
+    func calculateTotalPrice() -> Double {
+        var totalPrice = 0
+        for item in shoppingCart {
+            totalPrice += Int(item.price * Double(item.quantity))
+        }
+        return Double(totalPrice)
     }
     
 
@@ -182,11 +195,20 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         print("DEBUG: buy button tapped")
     }
     
-    @objc func plusButtonTapped(){
-        print("ajbskdf")
+    @objc func plusButtonTapped(_ sender: UIButton) {
+        let cell = sender.superview?.superview as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let product = shoppingCart[indexPath!.row]
+        Product.plusProductQuantity(product: product)
+        reloadData()
     }
-    @objc func minusButtonTapped(){
-        print("ajbskdf")
+
+    @objc func minusButtonTapped(_ sender: UIButton) {
+        let cell = sender.superview?.superview as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let product = shoppingCart[indexPath!.row]
+        Product.minusProductQuantity(product: product)
+        reloadData()
     }
     
 }
