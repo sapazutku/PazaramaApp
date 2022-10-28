@@ -33,6 +33,11 @@ extension Product {
         for item in getAllProducts() {
             if item.title == product.title {
                 item.quantity += 1
+                do {
+                    try context.save()
+                } catch {
+                    print("Failed saving")
+                }
                 return
             }
         }
@@ -40,33 +45,36 @@ extension Product {
         newProduct.setValue(product.title, forKey: "title")
         newProduct.setValue(product.price, forKey: "price")
         newProduct.setValue(1, forKey: "quantity")
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
+        }
     }
 
-    // delete product from core data
+    // plus product quantity
+    static func plusProductQuantity(product: ProductItem) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        product.quantity += 1
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
+        }
+    }
 
-    
+    // minus product quantity
+    static func minusProductQuantity(product: ProductItem) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        if product.quantity > 1 {
+            product.quantity -= 1
+        } 
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
+        }
+    }
+
 }
-
-/*
-for item in products {
-            if item.title == product.title {
-                product.quantity += 1
-                return
-            }
-        }
-
-
-if let productItem = Product.getAllProducts().first(where: { $0.title == product.title }) {
-            productItem.quantity += 1
-        } else {
-            newProduct.setValue(product.title, forKey: "title")
-            newProduct.setValue(product.price, forKey: "price")
-            newProduct.setValue(1, forKey: "quantity")
-            do {
-                try context.save()
-            } catch {
-                print("Failed")
-            }
-        }
-*/
 

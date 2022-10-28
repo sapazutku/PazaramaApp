@@ -72,8 +72,8 @@ class ProductCustomCell: UICollectionViewCell {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Add to Cart", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.backgroundColor = .systemIndigo
-        btn.layer.cornerRadius = 12
+        btn.backgroundColor = .systemPink
+        btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)
         return btn
     }()
@@ -86,15 +86,15 @@ class ProductCustomCell: UICollectionViewCell {
         
         // image
         contentView.addSubview(bg)
-        bg.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        bg.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
         
         // title
         contentView.addSubview(lbl)
-        lbl.frame = CGRect(x: 0, y: 200, width: 200, height: 50)
+        lbl.frame = CGRect(x: 0, y: 150, width: 150, height: 50)
 
         // price
         contentView.addSubview(price)
-        price.frame = CGRect(x: 100, y: lbl.frame.origin.y + 20, width: 100, height: 100)
+        price.frame = CGRect(x: 75, y: lbl.frame.origin.y + 20, width: 100, height: 100)
 
         // star
         contentView.addSubview(star)
@@ -102,7 +102,7 @@ class ProductCustomCell: UICollectionViewCell {
 
         // button
         contentView.addSubview(addToCart)
-        addToCart.frame = CGRect(x: 25, y: 300, width: 150, height: 40)
+        addToCart.frame = CGRect(x: 20, y: 250, width: 120, height: 30)
 
         // cell border
         contentView.layer.borderWidth = 1
