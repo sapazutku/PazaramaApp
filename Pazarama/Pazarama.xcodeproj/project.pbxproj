@@ -96,6 +96,15 @@
 			path = ProductItem;
 			sourceTree = "<group>";
 		};
+		54205C64290C6BE0000AB0C2 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				5441283929074FF4000A6194 /* LaunchViewController.swift */,
+				5441283529074A56000A6194 /* TabBarController.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		5441280129073C98000A6194 = {
 			isa = PBXGroup;
 			children = (
@@ -210,11 +219,10 @@
 		5441282D29073CE6000A6194 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				54205C64290C6BE0000AB0C2 /* General */,
 				547829B52909FB4D0082778C /* User */,
 				5441281129073C98000A6194 /* HomeViewController.swift */,
-				5441283529074A56000A6194 /* TabBarController.swift */,
 				5441283729074CF1000A6194 /* CategoryViewController.swift */,
-				5441283929074FF4000A6194 /* LaunchViewController.swift */,
 				5441283F29075222000A6194 /* ShoppingCartViewController.swift */,
 			);
 			path = ViewControllers;
