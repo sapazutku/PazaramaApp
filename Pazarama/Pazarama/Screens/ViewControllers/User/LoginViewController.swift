@@ -81,15 +81,18 @@ class LoginViewController: UIViewController {
 
     // MARK: - Lifecycle
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        controlUser()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetchRemote()
         configureUI()
-        //controlUser()
-
-        
     }
 
+    
     // MARK: - Helpers
 
     func configureUI() {
@@ -196,7 +199,7 @@ class LoginViewController: UIViewController {
           else{
               let alert = UIAlertController(title: "Login Succesfull", message: "Logged in", preferredStyle: .actionSheet)
               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-              self.goToMain()
+              
           }
               
       })
@@ -207,21 +210,19 @@ class LoginViewController: UIViewController {
         let controller = RegisterViewController()
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
-
-        
     }
     
-    func goToMain(){
-        let controller = TabBarController()
-        controller.modalPresentationStyle = .fullScreen
-        present(controller, animated: true, completion: nil)
+    
+    func controlUser(){
+        if Auth.auth().currentUser != nil {
+            let tabBar = TabBarController()
+            tabBar.modalPresentationStyle = .fullScreen
+            present(tabBar, animated: true)
+        }
+        print(Auth.auth().currentUser!)
     }
 
-    func controlUser(){
-        if (Auth.auth().currentUser != nil) {
-            goToMain()
-        }
-    }
+
 }
 
     

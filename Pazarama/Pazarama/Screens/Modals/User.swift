@@ -24,14 +24,7 @@ class User {
         
     }
     
-    struct Order {
-        var items: [String]
-        var price: Int
-        init(items: [String], price: Int) {
-            self.items = items
-            self.price = price
-        }
-    }
+
 
     
 }
