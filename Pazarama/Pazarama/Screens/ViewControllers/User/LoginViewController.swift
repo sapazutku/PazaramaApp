@@ -8,9 +8,16 @@
 import UIKit
 import SnapKit
 import Lottie
+import FirebaseRemoteConfig
+import FirebaseFirestore
+import FirebaseAuth
+
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
+    
+    private let remoteConfig = RemoteConfig.remoteConfig()
+
 
     private var animationView = LottieAnimationView()
     
@@ -53,7 +60,7 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.layer.cornerRadius = 5
         button.isEnabled = false
-        //button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
 
@@ -131,8 +138,8 @@ class LoginViewController: UIViewController {
     }
     // MARK: - Methods
     
-/**
- REMOTE CONFIG
+
+ // REMOTE CONFIG
  func fetchRemote(){
      let defaults:[String:NSObject] = ["sign_up_available" : true as NSObject]
 
@@ -152,7 +159,7 @@ class LoginViewController: UIViewController {
      
  })
  }
- */
+ 
 
     func updateSignUp(value:Int){
         if value == 1{
@@ -174,7 +181,7 @@ class LoginViewController: UIViewController {
         }
     }
 
- /**
+
   @objc func handleLogin() {
       guard let emailTextField = emailTextField.text else {return}
       guard let password = passwordTextField.text else {return}
@@ -195,7 +202,6 @@ class LoginViewController: UIViewController {
       })
       
   }
-  */
 
     @objc func handleShowSignUp() {
         let controller = RegisterViewController()
@@ -206,17 +212,16 @@ class LoginViewController: UIViewController {
     }
     
     func goToMain(){
-        let customBar = TabBarController()
-        self.navigationController?.pushViewController(customBar, animated: true)
+        let controller = TabBarController()
+        controller.modalPresentationStyle = .fullScreen
+        present(controller, animated: true, completion: nil)
     }
 
-   /**
     func controlUser(){
         if (Auth.auth().currentUser != nil) {
             goToMain()
         }
     }
-    */
 }
 
     
