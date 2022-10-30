@@ -8,9 +8,16 @@
 import UIKit
 import SnapKit
 import Lottie
+import FirebaseRemoteConfig
+import FirebaseFirestore
+import FirebaseAuth
+
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
+    
+    private let remoteConfig = RemoteConfig.remoteConfig()
+
 
     private var animationView = LottieAnimationView()
     
@@ -53,7 +60,7 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.layer.cornerRadius = 5
         button.isEnabled = false
-        //button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
 
@@ -74,15 +81,18 @@ class LoginViewController: UIViewController {
 
     // MARK: - Lifecycle
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        controlUser()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //fetchRemote()
         configureUI()
-        //controlUser()
-
-        
     }
 
+    
     // MARK: - Helpers
 
     func configureUI() {
@@ -131,8 +141,8 @@ class LoginViewController: UIViewController {
     }
     // MARK: - Methods
     
-/**
- REMOTE CONFIG
+
+ // REMOTE CONFIG
  func fetchRemote(){
      let defaults:[String:NSObject] = ["sign_up_available" : true as NSObject]
 
@@ -152,7 +162,7 @@ class LoginViewController: UIViewController {
      
  })
  }
- */
+ 
 
     func updateSignUp(value:Int){
         if value == 1{
@@ -174,7 +184,7 @@ class LoginViewController: UIViewController {
         }
     }
 
- /**
+
   @objc func handleLogin() {
       guard let emailTextField = emailTextField.text else {return}
       guard let password = passwordTextField.text else {return}
@@ -189,34 +199,30 @@ class LoginViewController: UIViewController {
           else{
               let alert = UIAlertController(title: "Login Succesfull", message: "Logged in", preferredStyle: .actionSheet)
               alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-              self.goToMain()
+              
           }
               
       })
       
   }
-  */
 
     @objc func handleShowSignUp() {
         let controller = RegisterViewController()
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
-
-        
     }
     
-    func goToMain(){
-        let customBar = TabBarController()
-        self.navigationController?.pushViewController(customBar, animated: true)
+    
+    func controlUser(){
+        if Auth.auth().currentUser != nil {
+            let tabBar = TabBarController()
+            tabBar.modalPresentationStyle = .fullScreen
+            present(tabBar, animated: true)
+        }
+        print(Auth.auth().currentUser!)
     }
 
-   /**
-    func controlUser(){
-        if (Auth.auth().currentUser != nil) {
-            goToMain()
-        }
-    }
-    */
+
 }
 
     
