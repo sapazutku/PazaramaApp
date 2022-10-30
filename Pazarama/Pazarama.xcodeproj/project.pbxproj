@@ -41,11 +41,11 @@
 		54E863A2290D555F00346D61 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8639E290D555F00346D61 /* CategoryCollectionViewCell.swift */; };
 		54E863A3290D555F00346D61 /* ShoppingCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E863A0290D555F00346D61 /* ShoppingCartCell.swift */; };
 		54F0FB72290EB7C3007B75AD /* emptybox.json in Resources */ = {isa = PBXBuildFile; fileRef = 54F0FB71290EB7C3007B75AD /* emptybox.json */; };
-		54F0FB75290EC028007B75AD /* CustomInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0FB74290EC028007B75AD /* CustomInput.swift */; };
 		54F0FB77290ED6CA007B75AD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54F0FB76290ED6CA007B75AD /* GoogleService-Info.plist */; };
 		54F0FB7A290ED7C6007B75AD /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54F0FB79290ED7C6007B75AD /* FirebaseAuth */; };
 		54F0FB7C290ED7C6007B75AD /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 54F0FB7B290ED7C6007B75AD /* FirebaseFirestore */; };
 		54F0FB7E290ED7C6007B75AD /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 54F0FB7D290ED7C6007B75AD /* FirebaseRemoteConfig */; };
+		54F0FB83290F1932007B75AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0FB82290F1932007B75AD /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,9 +81,9 @@
 		54E8639E290D555F00346D61 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		54E863A0290D555F00346D61 /* ShoppingCartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartCell.swift; sourceTree = "<group>"; };
 		54F0FB71290EB7C3007B75AD /* emptybox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptybox.json; sourceTree = "<group>"; };
-		54F0FB74290EC028007B75AD /* CustomInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInput.swift; sourceTree = "<group>"; };
 		54F0FB76290ED6CA007B75AD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54F0FB7F290EDD20007B75AD /* Pazarama.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pazarama.entitlements; sourceTree = "<group>"; };
+		54F0FB82290F1932007B75AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +256,7 @@
 				54B1D0AA29082D9E008864B9 /* CategoryModal.swift */,
 				54B1D0B2290853A1008864B9 /* Product.swift */,
 				547829B32909F9F20082778C /* ShoppingCart.swift */,
+				54F0FB82290F1932007B75AD /* User.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -333,7 +334,6 @@
 		54F0FB73290EC019007B75AD /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				54F0FB74290EC028007B75AD /* CustomInput.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -433,6 +433,7 @@
 				54205C6A290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */,
 				54205C66290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */,
 				54E863A3290D555F00346D61 /* ShoppingCartCell.swift in Sources */,
+				54F0FB83290F1932007B75AD /* User.swift in Sources */,
 				5441284029075222000A6194 /* ShoppingCartViewController.swift in Sources */,
 				547829B72909FB690082778C /* LoginViewController.swift in Sources */,
 				54D84A8F2909E6C6009620AF /* UserDefaults+Extension.swift in Sources */,
@@ -449,7 +450,6 @@
 				5441283A29074FF4000A6194 /* LaunchViewController.swift in Sources */,
 				5441283D29075120000A6194 /* ProfileViewController.swift in Sources */,
 				5441281029073C98000A6194 /* SceneDelegate.swift in Sources */,
-				54F0FB75290EC028007B75AD /* CustomInput.swift in Sources */,
 				54B1D0AB29082D9E008864B9 /* CategoryModal.swift in Sources */,
 				54B1D0B3290853A1008864B9 /* Product.swift in Sources */,
 				54E863A1290D555F00346D61 /* ProductCustomCell.swift in Sources */,

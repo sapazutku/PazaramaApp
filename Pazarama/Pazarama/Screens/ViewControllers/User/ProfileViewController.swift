@@ -6,7 +6,10 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
 import SnapKit
+//import FirebaseStorage
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsArray.count ?? .zero
@@ -20,15 +23,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.textLabel?.textAlignment = .center
         return cell
     }
-    
-    
-
 
     // MARK: - Properties
 
     private let settingsArray = ["Change Profile Photo", "Change Username", "Change E-mail", "Change Password", "My Orders", "About App"]
 
     // user info
+    var user: User?
+
+
      private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -68,6 +71,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        getUser()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUser()
     }
 
 
@@ -115,6 +124,30 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     // MARK: - Methods
+
+    func getUserPhoto(uid:String){
+        // get profile image from firebase storage
+       print("a")
+    }
+
+    public func getUser(){   
+        // get user info from Firestore
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                print("DEBUG: Failed to fetch user with error \(error.localizedDescription)")
+                return
+            }
+            guard let dictionary = snapshot?.data() else { return }
+            self.user = User(username: dictionary["username"] as! String, email: dictionary["email"] as! String, orders: dictionary["orders"] as! [String], uid: uid)
+            self.usernameLabel.text = self.user?.username
+            self.emailLabel.text = self.user?.email
+            
+            self.getUserPhoto(uid: uid)
+            self.tableView.reloadData()
+            
+        }
+    }
 
     @objc func handleLogout(){
        print("DEBUG: handle logout")
