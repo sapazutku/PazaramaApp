@@ -25,7 +25,6 @@
 		5441284029075222000A6194 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283F29075222000A6194 /* ShoppingCartViewController.swift */; };
 		5441284229075E68000A6194 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5441284129075E68000A6194 /* loading.json */; };
 		5441284429075F36000A6194 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5441284329075F36000A6194 /* Launch.storyboard */; };
-		5441284929076698000A6194 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441284829076698000A6194 /* CategoryCollectionViewCell.swift */; };
 		547829B22909F3A10082778C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 547829B12909F3A10082778C /* SnapKit */; };
 		547829B42909F9F20082778C /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547829B32909F9F20082778C /* ShoppingCart.swift */; };
 		547829B72909FB690082778C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547829B62909FB690082778C /* LoginViewController.swift */; };
@@ -36,10 +35,12 @@
 		54B1D0AE29084A64008864B9 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 54B1D0AD29084A64008864B9 /* Moya */; };
 		54B1D0B129084AB1008864B9 /* ProductsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1D0B029084AB1008864B9 /* ProductsAPI.swift */; };
 		54B1D0B3290853A1008864B9 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1D0B2290853A1008864B9 /* Product.swift */; };
-		54C9729F2908956D00558CA0 /* ProductCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9729E2908956D00558CA0 /* ProductCustomCell.swift */; };
 		54C972A22908973700558CA0 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C972A12908973700558CA0 /* UIImageView+Extensions.swift */; };
-		54D84A8D2909E5A1009620AF /* ShoppingCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D84A8C2909E5A1009620AF /* ShoppingCartCell.swift */; };
 		54D84A8F2909E6C6009620AF /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D84A8E2909E6C6009620AF /* UserDefaults+Extension.swift */; };
+		54E863A1290D555F00346D61 /* ProductCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8639C290D555F00346D61 /* ProductCustomCell.swift */; };
+		54E863A2290D555F00346D61 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8639E290D555F00346D61 /* CategoryCollectionViewCell.swift */; };
+		54E863A3290D555F00346D61 /* ShoppingCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E863A0290D555F00346D61 /* ShoppingCartCell.swift */; };
+		54F0FB72290EB7C3007B75AD /* emptybox.json in Resources */ = {isa = PBXBuildFile; fileRef = 54F0FB71290EB7C3007B75AD /* emptybox.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +63,6 @@
 		5441283F29075222000A6194 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		5441284129075E68000A6194 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		5441284329075F36000A6194 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
-		5441284829076698000A6194 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		547829B32909F9F20082778C /* ShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCart.swift; sourceTree = "<group>"; };
 		547829B62909FB690082778C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		547829B82909FB7B0082778C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -70,10 +70,12 @@
 		54B1D0AA29082D9E008864B9 /* CategoryModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModal.swift; sourceTree = "<group>"; };
 		54B1D0B029084AB1008864B9 /* ProductsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAPI.swift; sourceTree = "<group>"; };
 		54B1D0B2290853A1008864B9 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		54C9729E2908956D00558CA0 /* ProductCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCustomCell.swift; sourceTree = "<group>"; };
 		54C972A12908973700558CA0 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		54D84A8C2909E5A1009620AF /* ShoppingCartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCell.swift; sourceTree = "<group>"; };
 		54D84A8E2909E6C6009620AF /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		54E8639C290D555F00346D61 /* ProductCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCustomCell.swift; sourceTree = "<group>"; };
+		54E8639E290D555F00346D61 /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		54E863A0290D555F00346D61 /* ShoppingCartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartCell.swift; sourceTree = "<group>"; };
+		54F0FB71290EB7C3007B75AD /* emptybox.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptybox.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,9 +163,10 @@
 		5441282529073CA2000A6194 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				54E8639A290D555F00346D61 /* Views */,
+				54E86399290D54EF00346D61 /* Modal Views */,
 				5441283B290750F0000A6194 /* Modals */,
 				5441282D29073CE6000A6194 /* ViewControllers */,
-				5441282C29073CDD000A6194 /* View */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 		5441282629073CA8000A6194 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				54F0FB71290EB7C3007B75AD /* emptybox.json */,
 				547829BD2909FE3C0082778C /* ecommerce.json */,
 				5441284129075E68000A6194 /* loading.json */,
 				5441281929073C99000A6194 /* Assets.xcassets */,
@@ -220,16 +224,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		5441282C29073CDD000A6194 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				54D84A8B2909E580009620AF /* Cart */,
-				54B1D0B42908571C008864B9 /* Home */,
-				54412845290763CD000A6194 /* Category */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		5441282D29073CE6000A6194 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,14 +246,6 @@
 			path = Modals;
 			sourceTree = "<group>";
 		};
-		54412845290763CD000A6194 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				5441284829076698000A6194 /* CategoryCollectionViewCell.swift */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
 		547829B52909FB4D0082778C /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,14 +264,6 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		54B1D0B42908571C008864B9 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				54C9729E2908956D00558CA0 /* ProductCustomCell.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		54C972A02908972500558CA0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,10 +274,44 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		54D84A8B2909E580009620AF /* Cart */ = {
+		54E86399290D54EF00346D61 /* Modal Views */ = {
 			isa = PBXGroup;
 			children = (
-				54D84A8C2909E5A1009620AF /* ShoppingCartCell.swift */,
+			);
+			path = "Modal Views";
+			sourceTree = "<group>";
+		};
+		54E8639A290D555F00346D61 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				54E8639B290D555F00346D61 /* Home */,
+				54E8639D290D555F00346D61 /* Category */,
+				54E8639F290D555F00346D61 /* Cart */,
+			);
+			name = Views;
+			path = Pazarama/Screens/Views;
+			sourceTree = SOURCE_ROOT;
+		};
+		54E8639B290D555F00346D61 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				54E8639C290D555F00346D61 /* ProductCustomCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		54E8639D290D555F00346D61 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				54E8639E290D555F00346D61 /* CategoryCollectionViewCell.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		54E8639F290D555F00346D61 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				54E863A0290D555F00346D61 /* ShoppingCartCell.swift */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -376,6 +388,7 @@
 			files = (
 				5441281A29073C99000A6194 /* Assets.xcassets in Resources */,
 				5441284229075E68000A6194 /* loading.json in Resources */,
+				54F0FB72290EB7C3007B75AD /* emptybox.json in Resources */,
 				547829BE2909FE3C0082778C /* ecommerce.json in Resources */,
 				5441284429075F36000A6194 /* Launch.storyboard in Resources */,
 			);
@@ -392,8 +405,8 @@
 				5441281229073C98000A6194 /* HomeViewController.swift in Sources */,
 				54205C6A290C781F000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */,
 				54205C66290C7498000AB0C2 /* ProductItem+CoreDataProperties.swift in Sources */,
+				54E863A3290D555F00346D61 /* ShoppingCartCell.swift in Sources */,
 				5441284029075222000A6194 /* ShoppingCartViewController.swift in Sources */,
-				54C9729F2908956D00558CA0 /* ProductCustomCell.swift in Sources */,
 				547829B72909FB690082778C /* LoginViewController.swift in Sources */,
 				54D84A8F2909E6C6009620AF /* UserDefaults+Extension.swift in Sources */,
 				5441283829074CF1000A6194 /* CategoryViewController.swift in Sources */,
@@ -405,13 +418,13 @@
 				5441283629074A56000A6194 /* TabBarController.swift in Sources */,
 				547829B92909FB7B0082778C /* RegisterViewController.swift in Sources */,
 				54B1D0B129084AB1008864B9 /* ProductsAPI.swift in Sources */,
-				5441284929076698000A6194 /* CategoryCollectionViewCell.swift in Sources */,
+				54E863A2290D555F00346D61 /* CategoryCollectionViewCell.swift in Sources */,
 				5441283A29074FF4000A6194 /* LaunchViewController.swift in Sources */,
 				5441283D29075120000A6194 /* ProfileViewController.swift in Sources */,
-				54D84A8D2909E5A1009620AF /* ShoppingCartCell.swift in Sources */,
 				5441281029073C98000A6194 /* SceneDelegate.swift in Sources */,
 				54B1D0AB29082D9E008864B9 /* CategoryModal.swift in Sources */,
 				54B1D0B3290853A1008864B9 /* Product.swift in Sources */,
+				54E863A1290D555F00346D61 /* ProductCustomCell.swift in Sources */,
 				54205C6D290C7EB6000AB0C2 /* ProductListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,17 +556,20 @@
 				DEVELOPMENT_TEAM = FYD3C8URS2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pazarama/App/Plists/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Pazarama;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Launch.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.utkusapaz.Pazarama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -572,17 +588,20 @@
 				DEVELOPMENT_TEAM = FYD3C8URS2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pazarama/App/Plists/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Pazarama;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Launch.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.utkusapaz.Pazarama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

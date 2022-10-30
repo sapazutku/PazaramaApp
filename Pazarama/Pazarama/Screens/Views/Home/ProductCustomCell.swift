@@ -70,8 +70,11 @@ class ProductCustomCell: UICollectionViewCell {
     var addToCart: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Add to Cart", for: .normal)
+       
+        btn.setImage(UIImage(systemName: "cart.badge.plus")?.withTintColor(.white, renderingMode: .alwaysOriginal), for: .normal)
         btn.setTitleColor(.white, for: .normal)
+        //btn.setTitle("Add to ", for: .normal)
+       
         btn.backgroundColor = .systemPink
         btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(addToCartAction), for: .touchUpInside)

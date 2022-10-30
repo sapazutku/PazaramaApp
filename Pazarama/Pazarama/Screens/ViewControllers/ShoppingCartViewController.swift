@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Lottie
 class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shoppingCart.count ?? .zero
@@ -71,9 +72,15 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     var shoppingCart: [ProductItem] = []
-
+    var emptyAnimation = LottieAnimationView()
     // table
     private let tableView = UITableView()
+
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshControl
+    }()
 
     // total item
     private let totalItemLabel: UILabel = {
@@ -117,6 +124,10 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Helpers
 
     func configureUI() {
+        // refresh control
+        tableView.refreshControl = refreshControl
+
+
         // navigation item title
         navigationItem.title = "Shopping Chart"
         // 
@@ -126,10 +137,6 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "shoppingCell")
         tableView.rowHeight = 70
         tableView.tableFooterView = UIView()
-        // add row to button
-
-        
-        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
@@ -159,6 +166,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             make.height.equalTo(50)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
         }
+
+        showEmptyAnimation()
         
     }
 
@@ -169,6 +178,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         shoppingCart = Product.getAllProducts()
         print("Shopping Cart: \(shoppingCart)")
         reloadData()
+        
     }
 
     // MARK: - Helpers
@@ -178,6 +188,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             self.totalItemLabel.text = "Total Item: \(self.shoppingCart.count)"
             self.totalPriceLabel.text = "Total Price: \(self.calculateTotalPrice())"
         }
+        showEmptyAnimation()
     }
 
     func calculateTotalPrice() -> Double {
@@ -187,12 +198,41 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         }
         return Double(totalPrice)
     }
+
+    func showEmptyAnimation() {
+        if shoppingCart.count == 0 {
+            emptyAnimation = LottieAnimationView(name: "emptybox")
+            emptyAnimation.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+            emptyAnimation.center = view.center
+            emptyAnimation.contentMode = .scaleAspectFit
+            emptyAnimation.loopMode = .loop
+            emptyAnimation.play()
+            view.addSubview(emptyAnimation)
+        } else {
+            emptyAnimation.removeFromSuperview()
+        }
+    }
     
 
     // MARK: - Selectors
 
+    @objc func refresh() {
+        getAllProducts()
+        refreshControl.endRefreshing()
+    }
+
     @objc func buyButtonTapped() {
-        print("DEBUG: buy button tapped")
+        // show alert 
+        let alert = UIAlertController(title: "Buy", message: "Do you want to buy all items?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            // delete all products
+            Product.deleteAllProducts()
+            self.shoppingCart.removeAll()
+            self.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
     }
     
     @objc func plusButtonTapped(_ sender: UIButton) {
