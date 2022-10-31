@@ -205,7 +205,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func handleLogout(){
         do {
             try Auth.auth().signOut()
-            let nav = UINavigationController(rootViewController: LoginController())
+            let nav = UINavigationController(rootViewController: LoginViewController())
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
         } catch {
