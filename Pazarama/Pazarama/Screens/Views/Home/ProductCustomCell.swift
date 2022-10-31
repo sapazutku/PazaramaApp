@@ -7,7 +7,7 @@
 
 import UIKit
 import CoreData
-
+import Drops
 class ProductCustomCell: UICollectionViewCell {
 
     var product: Product? {
@@ -19,6 +19,10 @@ class ProductCustomCell: UICollectionViewCell {
             star.text = String(product.rating.rate) + " ⭐️"
         }
     }
+    
+    // alert
+    
+    let drop = Drop(title: "Added to Cart",  icon: UIImage(systemName: "checkmark"))
     
     // image
 
@@ -121,7 +125,8 @@ class ProductCustomCell: UICollectionViewCell {
 
     // MARK: - Methods
     @objc func addToCartAction() {
-        // TODO: Add Core Data
         Product.addProduct(product: product!)
+        Drops.show(drop)
+
     }
 }

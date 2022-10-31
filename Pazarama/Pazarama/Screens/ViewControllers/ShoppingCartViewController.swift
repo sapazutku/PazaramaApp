@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Lottie
+import Drops
 class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return shoppingCart.count ?? .zero
@@ -70,6 +71,11 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
 
             return cell
     }
+
+
+    // MARK: - Properties
+
+    let drop = Drop(title: "Success", subtitle: "Your order has been placed successfully", icon: UIImage(systemName: "checkmark.circle.fill"))
     
     var shoppingCart: [ProductItem] = []
     var emptyAnimation = LottieAnimationView()
@@ -229,6 +235,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             Product.deleteAllProducts()
             self.shoppingCart.removeAll()
             self.reloadData()
+            Drops.show(self.drop)
         }))
         alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)

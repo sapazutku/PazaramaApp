@@ -11,7 +11,7 @@ import Lottie
 import FirebaseRemoteConfig
 import FirebaseFirestore
 import FirebaseAuth
-
+import Drops
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
@@ -197,8 +197,8 @@ class LoginViewController: UIViewController {
               return
           }
           else{
-              let alert = UIAlertController(title: "Login Succesfull", message: "Logged in", preferredStyle: .actionSheet)
-              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+              Drops.show(Drop(title: "Welcome", subtitle: "You are logged in", icon: UIImage(systemName: "figure.wave")))
+              self.navigationController?.pushViewController(TabBarController(), animated: true)
               
           }
               
@@ -219,7 +219,6 @@ class LoginViewController: UIViewController {
             tabBar.modalPresentationStyle = .fullScreen
             present(tabBar, animated: true)
         }
-        print(Auth.auth().currentUser!)
     }
 
 

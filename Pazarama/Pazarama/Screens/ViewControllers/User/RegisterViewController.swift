@@ -9,9 +9,11 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 import FirebaseFirestore
+import Drops
 class RegisterViewController: UIViewController {
     
     // MARK: - Properties
+
     
     private let logoImageView: UIImageView = {
         let iv = UIImageView()
@@ -145,9 +147,7 @@ class RegisterViewController: UIViewController {
 
         FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                Drops.show(Drop(title: "Error", subtitle: error.localizedDescription, icon: UIImage(systemName: "xmark.circle.fill")))
                 return
             }
             
@@ -158,9 +158,7 @@ class RegisterViewController: UIViewController {
             let values = ["email": email, "username": username, "password": password]
             Firestore.firestore().collection("users").document(uid).setData(values) { error in
                 if let error = error {
-                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true)
+                    Drops.show(Drop(title: "Error", subtitle: error.localizedDescription, icon: UIImage(systemName: "xmark.circle.fill")))
                     return
                 }
                 // Update for display name
@@ -168,18 +166,12 @@ class RegisterViewController: UIViewController {
                 changeRequest?.displayName = username
                 changeRequest?.commitChanges(completion: { error in
                     if let error = error {
-                        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alert, animated: true)
+                        Drops.show(Drop(title: "Error", subtitle: error.localizedDescription, icon: UIImage(systemName: "xmark.circle.fill")))
                         return
                     }
                 })
                 print("Successfully saved user info to Firestore")   
-                let alert = UIAlertController(title: "Success", message: "User created successfully", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler:  { _ in
-                    self.navigationController?.popViewController(animated: true)
-                }))
-                self.present(alert, animated: true)
+                Drops.show(Drop(title: "Welcome to the Pazarama", subtitle: "You have successfully created your acount", icon: UIImage(systemName: "figure.wave")))
             }
         }
         

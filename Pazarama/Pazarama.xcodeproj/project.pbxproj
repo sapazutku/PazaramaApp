@@ -25,6 +25,7 @@
 		5441284029075222000A6194 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5441283F29075222000A6194 /* ShoppingCartViewController.swift */; };
 		5441284229075E68000A6194 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5441284129075E68000A6194 /* loading.json */; };
 		5441284429075F36000A6194 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5441284329075F36000A6194 /* Launch.storyboard */; };
+		5470E417291080370064D7AD /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = 5470E416291080370064D7AD /* Drops */; };
 		547829B22909F3A10082778C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 547829B12909F3A10082778C /* SnapKit */; };
 		547829B42909F9F20082778C /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547829B32909F9F20082778C /* ShoppingCart.swift */; };
 		547829B72909FB690082778C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547829B62909FB690082778C /* LoginViewController.swift */; };
@@ -97,6 +98,7 @@
 				547829B22909F3A10082778C /* SnapKit in Frameworks */,
 				54F0FB86290F308E007B75AD /* FirebaseAuth in Frameworks */,
 				547829BC2909FD3E0082778C /* IQKeyboardManagerSwift in Frameworks */,
+				5470E417291080370064D7AD /* Drops in Frameworks */,
 				54F0FB8A290F308E007B75AD /* FirebaseRemoteConfig in Frameworks */,
 				54B1D0AE29084A64008864B9 /* Moya in Frameworks */,
 				54F0FB8C290F308E007B75AD /* FirebaseStorage in Frameworks */,
@@ -368,6 +370,7 @@
 				54F0FB87290F308E007B75AD /* FirebaseFirestore */,
 				54F0FB89290F308E007B75AD /* FirebaseRemoteConfig */,
 				54F0FB8B290F308E007B75AD /* FirebaseStorage */,
+				5470E416291080370064D7AD /* Drops */,
 			);
 			productName = Pazarama;
 			productReference = 5441280A29073C98000A6194 /* Pazarama.app */;
@@ -403,6 +406,7 @@
 				547829B02909F3A10082778C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				547829BA2909FD3E0082778C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				54F0FB84290F308E007B75AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				5470E415291080370064D7AD /* XCRemoteSwiftPackageReference "Drops" */,
 			);
 			productRefGroup = 5441280B29073C98000A6194 /* Products */;
 			projectDirPath = "";
@@ -679,6 +683,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		5470E415291080370064D7AD /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omaralbeik/Drops.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		547829B02909F3A10082778C /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -718,6 +730,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 544128302907466D000A6194 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		5470E416291080370064D7AD /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5470E415291080370064D7AD /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
 		};
 		547829B12909F3A10082778C /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
