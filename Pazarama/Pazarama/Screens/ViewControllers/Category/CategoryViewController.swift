@@ -7,28 +7,15 @@
 
 import UIKit
 
-class ResultVC: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-    }
-}
+class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
 
-class CategoryViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
-
-    // MARK: - Properties
-
-    let searchController = UISearchController()
-    var filteredArray = [CategoryModal]()
-
-    private let categoryList: [CategoryModal] = [
-        CategoryModal(name: "electronics", image: "electronics"),
-        CategoryModal(name: "jewelery", image: "jewelery"),
-        CategoryModal(name: "women's clothing", image: "womens"),
-        CategoryModal(name: "men's clothing", image: "mens"),
-    ]
-
+    
+    
+    
+    let categoryViewModal = CategoryViewModal()
     // MARK: - UI Elements
+    
+    let searchController = UISearchController()
 
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -81,19 +68,19 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     // MARK: - Overrides
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             if searchController.isActive && searchController.searchBar.text != "" {
-                return filteredArray.count ?? .zero
+                return categoryViewModal.filteredArray.count ?? .zero
             }
             else {
-                return categoryList.count ?? .zero
+                return categoryViewModal.categoryList.count ?? .zero
             }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Category", for: indexPath) as! CategoryCollectionViewCell
         if searchController.isActive && searchController.searchBar.text != "" {
-            cell.categoryImage.image = UIImage(named: filteredArray[indexPath.row].image)
+            cell.categoryImage.image = UIImage(named: categoryViewModal.filteredArray[indexPath.row].image)
         } else {
-            cell.categoryImage.image = UIImage(named: categoryList[indexPath.row].image)
+            cell.categoryImage.image = UIImage(named: categoryViewModal.categoryList[indexPath.row].image)
         }
         
         return cell
@@ -102,28 +89,22 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductListViewController()
         if searchController.isActive && searchController.searchBar.text != "" {
-            vc.category = filteredArray[indexPath.row].name
+            vc.category = categoryViewModal.filteredArray[indexPath.row].name
         } else {
-            vc.category = categoryList[indexPath.row].name
+            vc.category = categoryViewModal.categoryList[indexPath.row].name
         }
         navigationController?.pushViewController(vc, animated: true)
     }
-
     
-
-
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        let filtered = categoryList.filter { $0.name.lowercased().contains(text.lowercased()) }
-        filteredArray = filtered
+        let filtered = categoryViewModal.categoryList.filter { $0.name.lowercased().contains(text.lowercased()) }
+        categoryViewModal.filteredArray = filtered
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
-        print(filtered)
+        
     }
-
-
-
 
 }
 
