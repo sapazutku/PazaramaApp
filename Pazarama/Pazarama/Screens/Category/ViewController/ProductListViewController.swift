@@ -6,15 +6,6 @@
 //
 
 import UIKit
-
-//
-//  ViewController.swift
-//  Pazarama
-//
-//  Created by utku on 25.10.2022.
-//
-
-import UIKit
 import Moya
 
 class ProductListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
