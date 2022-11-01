@@ -10,69 +10,13 @@ import FirebaseAuth
 import FirebaseFirestore
 import SnapKit
 import FirebaseStorage
+import Drops
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsArray.count ?? .zero
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! UITableViewCell
-        cell.selectionStyle = .gray
-        cell.backgroundColor = .systemBackground
-        cell.textLabel?.text = settingsArray[indexPath.row]
-        cell.textLabel?.textAlignment = .center
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        handleSettings(row: indexPath.row)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        guard let image = info[.editedImage] as? UIImage else {
-            return
-        }
-        guard let imageData = image.pngData() else {
-            return
-        }
 
-        // get user id
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
-
-        storage.child("images/\(uid).png").putData(imageData, metadata: nil) { _, error in
-            guard error == nil else {
-                print("Failed to upload")
-                return
-            }
-            self.storage.child("images/\(uid).png").downloadURL { url, error in
-                guard let url = url, error == nil else {
-                    return
-                }
-                let urlString = url.absoluteString
-                print("Download URL: \(urlString)")
-                UserDefaults.standard.set(urlString, forKey: "profile_picture_url")
-                DispatchQueue.main.async {
-                    self.profileImageView.image = image
-                }
-            }
-        }
-
-    }
-
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
 
     // MARK: - Properties
 
-    private let settingsArray = ["Upload Profile Photo", "Change Username", "Change Email", "Change Password", "My Orders", "About App"]
-
-    // user info
-    var user: User?
+    let profileViewModal = ProfileViewModal()
     private let storage = Storage.storage().reference()
     
     var imagePicker = UIImagePickerController()
@@ -129,7 +73,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func configureUI(){
         // navigation item title
         navigationItem.title = "Profile"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right")?.withTintColor(.systemPink), style: .plain , target: self, action: #selector(handleLogout))
+        navigationItem.rightBarButtonItem?.tintColor = .systemPink
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "rectangle.portrait.and.arrow.right"), style: .plain , target: self, action: #selector(handleLogout))
        
         view.backgroundColor = .white
         // user info
@@ -172,18 +117,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func getUserPhoto(uid:String){
         // get profile image from firebase storage
-        Storage.storage().reference().child("images/\(uid).png").getData(maxSize: 15 * 1024 * 1024) { data, error in
-            if error != nil  {
-                print("Failed to fetch user photo with error \(error!.localizedDescription)")
-                return
-            }
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            self.profileImageView.image = image
-        }
+         Storage.storage().reference().child("images/\(uid).png").getData(maxSize: 15 * 1024 * 1024) { data, error in
+             if error != nil  {
+                 print("Failed to fetch user photo with error \(error!.localizedDescription)")
+                 return
+             }
+             guard let data = data else { return }
+             let image = UIImage(data: data)
+             self.profileImageView.image = image
+         }
+         
     }
 
-    public func getUser(){   
+    public func getUser(){
         // get user info from Firestore
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
@@ -192,13 +138,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 return
             }
             guard let dictionary = snapshot?.data() else { return }
-            self.user = User(username: dictionary["username"] as! String, email: dictionary["email"] as! String, orders: dictionary["orders"] as? [Order])
-            self.usernameLabel.text = self.user?.username
-            self.emailLabel.text = self.user?.email
-            
+            self.profileViewModal.user = User(username: dictionary["username"] as! String, email: dictionary["email"] as! String, orders: dictionary["orders"] as? [Order])
+            self.usernameLabel.text = self.profileViewModal.user?.username
+            self.emailLabel.text = self.profileViewModal.user?.email
             self.getUserPhoto(uid: uid)
-            
-            
         }
     }
 
@@ -242,7 +185,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     func openPhotoLibrary() {
@@ -260,24 +202,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         alert.addTextField { textField in
             textField.placeholder = "New Username"
         }
-        
         alert.addAction(UIAlertAction(title: "Change", style: .default, handler: { _ in
             let username = alert.textFields![0].text
-            let db = Firestore.firestore()
-            db.collection("users").document(Auth.auth().currentUser!.uid).updateData(["username": username!]) { error in
-                if error != nil {
-                    print("Error")
-                } else {
-                    print("Success")
-                    DispatchQueue.main.async {
-                        self.usernameLabel.text = username
-                    }
-                }
+            self.profileViewModal.updateUsername(username: username!)
+            // reload username from database
+            self.getUser()
+            Drops.show(Drop(title: "Username Updated", icon: UIImage(systemName: "person.crop.circle.fill.badge.checkmark")))
+            DispatchQueue.main.async {
+                self.usernameLabel.text = self.profileViewModal.user?.username
             }
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -288,15 +224,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         alert.addAction(UIAlertAction(title: "Change", style: .default, handler: { _ in
-            let passwword = alert.textFields![0].text
-            let db = Firestore.firestore()
-            db.collection("users").document(Auth.auth().currentUser!.uid).updateData(["password": passwword!]) { error in
-                if error != nil {
-                    print("Error")
-                } else {
-                    print("Success")
-                }
-            }
+            let password = alert.textFields![0].text
+            self.profileViewModal.updatePassword(password: password!)
+            Drops.show(Drop(title: "Password Updated", icon: UIImage(systemName: "person.crop.circle.fill.badge.checkmark")))
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -313,16 +243,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         alert.addAction(UIAlertAction(title: "Change", style: .default, handler: { _ in
             let email = alert.textFields![0].text
-            let db = Firestore.firestore()
-            db.collection("users").document(Auth.auth().currentUser!.uid).updateData(["email": email!]) { error in
-                if error != nil {
-                    print("Error")
-                } else {
-                    print("Success")
-                    DispatchQueue.main.async {
-                        self.emailLabel.text = email
-                    }
-                }
+            self.profileViewModal.updateEmail(email: email!)
+            // reload email from database
+            self.getUser()
+            Drops.show(Drop(title: "Email Updated", icon: UIImage(systemName: "person.crop.circle.fill.badge.checkmark")))
+            DispatchQueue.main.async {
+                self.emailLabel.text = self.profileViewModal.user?.email
             }
         }))
         
@@ -336,10 +262,68 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     func about() {
-        let alert = UIAlertController(title: "About", message: "Pazarama App is final project of Pazarama iOS Bootcamp.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "About", message: "Pazarama App is final project of Pazarama iOS Bootcamp, made by Utku Sapaz.`https://github.com/sapazutku/PazaramaApp`", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
+        //let imageView = UIImageView(frame: CGRect(x: 60, y: 5, width: 50, height: 50))
+        //imageView.image = UIImage(named: "pazarama")
+        //alert.view.addSubview(imageView)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: -Overrides
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return profileViewModal.settingsArray.count ?? .zero
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! UITableViewCell
+        cell.selectionStyle = .gray
+        cell.backgroundColor = .systemBackground
+        cell.textLabel?.text = profileViewModal.settingsArray[indexPath.row]
+        cell.textLabel?.textAlignment = .center
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        handleSettings(row: indexPath.row)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[.editedImage] as? UIImage else {
+            return
+        }
+        guard let imageData = image.pngData() else {
+            return
+        }
+
+        // get user id
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+
+        storage.child("images/\(uid).png").putData(imageData, metadata: nil) { _, error in
+            guard error == nil else {
+                print("Failed to upload")
+                return
+            }
+            self.storage.child("images/\(uid).png").downloadURL { url, error in
+                guard let url = url, error == nil else {
+                    return
+                }
+                let urlString = url.absoluteString
+                print("Download URL: \(urlString)")
+                UserDefaults.standard.set(urlString, forKey: "profile_picture_url")
+                DispatchQueue.main.async {
+                    self.profileImageView.image = image
+                }
+            }
+        }
+
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
          
 }

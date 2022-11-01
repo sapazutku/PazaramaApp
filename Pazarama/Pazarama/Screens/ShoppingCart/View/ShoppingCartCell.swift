@@ -10,5 +10,5 @@
  import SnapKit
 
  class ShoppingCartCell: UITableViewCell {
-     
+    
  }
