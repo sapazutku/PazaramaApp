@@ -10,15 +10,8 @@ import Moya
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
+    let homeViewModal = HomeViewModal()
     
-    
-    //MARK: - Properties
-    let provider = MoyaProvider<ProductsAPI>()
-
-    var products = [Product]()
-    var popularProducts = [Product]()
-    
-
     // MARK: - UI Elements
     private let collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -75,8 +68,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
-        getProducts()
-        
+        homeViewModal.getProducts()
+        homeViewModal.changeHandler = { change in
+            self.collectionView.reloadData()
+            self.allProductsCollectionView.reloadData()
+        }
+
     }
 
 
@@ -85,7 +82,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let scrollView = UIScrollView(frame: CGRect(x: 10, y: 10, width: view.frame.size.width, height: view.frame.size.height))
         scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height + 200)
         view.addSubview(scrollView)
-
+        
         scrollView.addSubview(collectionView)
         scrollView.addSubview(topTitle)
         scrollView.addSubview(allProductsTitle)
@@ -114,42 +111,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         allProductsCollectionView.delegate = self
         allProductsCollectionView.dataSource = self
     }
+    
+    func reloadCollectionData(){
+        collectionView.reloadData()
+        allProductsCollectionView.reloadData()
+    }
 
      
-
-
-
-    //MARK: - Methods
-    func getProducts() {
-        provider.request(.getProducts) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let res = try JSONDecoder().decode([Product].self, from: response.data)
-                    self.products = res
-                    self.findPopularProducts()
-                } catch {
-                    print(error)
-                }
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    self.allProductsCollectionView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
-    func findPopularProducts() {
-        for product in products {
-            if product.rating.count > 400{
-                popularProducts.append(product)
-            }
-        }
-        
-    }
-
     // MARK: - Overrides
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -158,9 +126,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionView {
-            return popularProducts.count ?? .zero
+            return homeViewModal.popularProducts.count ?? .zero
         } else {
-            return products.count ?? .zero
+            return homeViewModal.products.count ?? .zero
         }
 
     }
@@ -168,13 +136,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
-            cell.product = popularProducts[indexPath.row]
+            cell.product = homeViewModal.popularProducts[indexPath.row]
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCustomCell
-            cell.product = products[indexPath.row]
+            cell.product = homeViewModal.products[indexPath.row]
             return cell
         }
     }
+
+
 
 }
