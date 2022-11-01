@@ -89,5 +89,15 @@ extension Product {
         }
     }
 
+    // delete product
+    static func deleteProduct(product: ProductItem) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.delete(product)
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
+        }
+    }
 }
 

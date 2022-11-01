@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,10 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="pazarama" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lfn-hx-Lat">
-                                <rect key="frame" x="95" y="172" width="200" height="500"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pazarama" translatesAutoresizingMaskIntoConstraints="NO" id="S5X-vU-2DH">
+                                <rect key="frame" x="95" y="322" width="200" height="200"/>
                                 <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
@@ -28,9 +28,10 @@
                             <accessibilityTraits key="traits" notEnabled="YES"/>
                         </accessibility>
                         <constraints>
-                            <constraint firstItem="Lfn-hx-Lat" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="5nX-8W-9IA"/>
-                            <constraint firstItem="Lfn-hx-Lat" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="95" id="ene-c6-E0s"/>
-                            <constraint firstItem="Lfn-hx-Lat" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="yBE-iD-fKl"/>
+                            <constraint firstItem="S5X-vU-2DH" firstAttribute="centerX" secondItem="Bcu-3y-fUS" secondAttribute="centerX" id="8Pz-dB-Lff"/>
+                            <constraint firstItem="S5X-vU-2DH" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" constant="275" id="Hwn-rB-WX0"/>
+                            <constraint firstItem="S5X-vU-2DH" firstAttribute="centerY" secondItem="Bcu-3y-fUS" secondAttribute="centerY" constant="-6.5" id="dGq-dx-T5P"/>
+                            <constraint firstItem="S5X-vU-2DH" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" constant="95" id="uYt-CM-eUm"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,7 +41,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pazarama" width="500" height="500"/>
+        <image name="pazarama" width="200" height="200"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

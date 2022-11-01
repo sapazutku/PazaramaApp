@@ -10,76 +10,11 @@ import SnapKit
 import Lottie
 import Drops
 class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingCart.count ?? .zero
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! UITableViewCell
-            cell.textLabel?.text = shoppingCart[indexPath.row].title
-            cell.detailTextLabel?.text = String(shoppingCart[indexPath.row].price)
-            // plus button 
-            let plusButton = UIButton()
-            plusButton.setTitle("+", for: .normal)
-            plusButton.setTitleColor(.black, for: .normal)
-            plusButton.backgroundColor = .white
-            plusButton.layer.cornerRadius = 10
-            plusButton.layer.borderWidth = 1
-            plusButton.layer.borderColor = UIColor.black.cgColor
-            plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
-            cell.contentView.addSubview(plusButton)
-            plusButton.snp.makeConstraints { make in
-                make.top.equalTo(cell.contentView.snp.top).offset(25)
-                make.right.equalTo(cell.contentView.snp.right).offset(-10)
-                make.width.equalTo(30)
-                make.height.equalTo(30)
-            }
-
-            // minus button
-            let minusButton = UIButton()
-            minusButton.setTitle("-", for: .normal)
-            minusButton.setTitleColor(.black, for: .normal)
-            minusButton.backgroundColor = .white
-            minusButton.layer.cornerRadius = 10
-            minusButton.layer.borderWidth = 1
-            minusButton.layer.borderColor = UIColor.black.cgColor
-            minusButton.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
-            cell.contentView.addSubview(minusButton)
-            minusButton.snp.makeConstraints { make in
-                make.top.equalTo(cell.contentView.snp.top).offset(25)
-                make.right.equalTo(plusButton.snp.left).offset(-10)
-                make.width.equalTo(30)
-                make.height.equalTo(30)
-            }
-
-            // count label
-            let countLabel = UILabel()
-            countLabel.text = String(shoppingCart[indexPath.row].quantity)
-            countLabel.textColor = .black
-            countLabel.backgroundColor = .white
-            countLabel.layer.cornerRadius = 10
-            countLabel.layer.borderWidth = 0
-            countLabel.textAlignment = .center
-            cell.contentView.addSubview(countLabel)
-            countLabel.snp.makeConstraints { make in
-                make.top.equalTo(cell.contentView.snp.top).offset(25)
-                make.right.equalTo(minusButton.snp.left).offset(-10)
-                make.width.equalTo(30)
-                make.height.equalTo(30)
-            }
-
-
-            return cell
-    }
-
 
     // MARK: - Properties
-
+    let shoppingVM = ShoppingCartViewModel()
     let drop = Drop(title: "Success", subtitle: "Your order has been placed successfully", icon: UIImage(systemName: "checkmark.circle.fill"))
-    
-    var shoppingCart: [ProductItem] = []
     var emptyAnimation = LottieAnimationView()
-    // table
     private let tableView = UITableView()
 
     private let refreshControl: UIRefreshControl = {
@@ -122,7 +57,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAllProducts()
+        shoppingVM.getAllProducts()
         configureUI()
 
     }
@@ -179,34 +114,21 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
 
     // MARK: - Methods
 
-    // get all products from core data
-    func getAllProducts() {
-        shoppingCart = Product.getAllProducts()
-        print("Shopping Cart: \(shoppingCart)")
-        reloadData()
-        
-    }
+
 
     // MARK: - Helpers
     func reloadData(){
         DispatchQueue.main.async {
             self.tableView.reloadData()
-            self.totalItemLabel.text = "Total Item: \(self.shoppingCart.count)"
-            self.totalPriceLabel.text = "Total Price: \(self.calculateTotalPrice())"
+            self.totalItemLabel.text = "Total Item: \(self.shoppingVM.shoppingCart.count)"
+            self.totalPriceLabel.text = "Total Price: \(self.shoppingVM.calculateTotalPrice())"
         }
         showEmptyAnimation()
     }
 
-    func calculateTotalPrice() -> Double {
-        var totalPrice = 0
-        for item in shoppingCart {
-            totalPrice += Int(item.price * Double(item.quantity))
-        }
-        return Double(totalPrice)
-    }
 
     func showEmptyAnimation() {
-        if shoppingCart.count == 0 {
+        if shoppingVM.shoppingCart.count == 0 {
             emptyAnimation = LottieAnimationView(name: "emptybox")
             emptyAnimation.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             emptyAnimation.center = view.center
@@ -223,7 +145,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - Selectors
 
     @objc func refresh() {
-        getAllProducts()
+        shoppingVM.getAllProducts()
+        reloadData()
         refreshControl.endRefreshing()
     }
 
@@ -233,7 +156,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
             // delete all products
             Product.deleteAllProducts()
-            self.shoppingCart.removeAll()
+            self.shoppingVM.shoppingCart.removeAll()
             self.reloadData()
             Drops.show(self.drop)
         }))
@@ -245,7 +168,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     @objc func plusButtonTapped(_ sender: UIButton) {
         let cell = sender.superview?.superview as! UITableViewCell
         let indexPath = tableView.indexPath(for: cell)
-        let product = shoppingCart[indexPath!.row]
+        let product = shoppingVM.shoppingCart[indexPath!.row]
         Product.plusProductQuantity(product: product)
         reloadData()
     }
@@ -253,9 +176,98 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     @objc func minusButtonTapped(_ sender: UIButton) {
         let cell = sender.superview?.superview as! UITableViewCell
         let indexPath = tableView.indexPath(for: cell)
-        let product = shoppingCart[indexPath!.row]
+        let product = shoppingVM.shoppingCart[indexPath!.row]
         Product.minusProductQuantity(product: product)
         reloadData()
     }
     
+    
+    // MARK: - Overrides
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shoppingVM.shoppingCart.count ?? .zero
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //objects.remove(at: indexPath.row)
+            let product = shoppingVM.shoppingCart[indexPath.row]
+            Product.deleteProduct(product: product)
+            shoppingVM.shoppingCart.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            reloadData()
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! UITableViewCell
+        cell.textLabel?.text = shoppingVM.shoppingCart[indexPath.row].title
+        cell.textLabel?.lineBreakMode = .byTruncatingTail
+        // prevent text overflow
+        cell.textLabel?.numberOfLines = 1
+        //cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.lineBreakMode = .byTruncatingTail
+        
+
+        
+        
+
+        
+        
+        cell.detailTextLabel?.text = String(shoppingVM.shoppingCart[indexPath.row].price)
+            // plus button
+            let plusButton = UIButton()
+            plusButton.setTitle("+", for: .normal)
+            plusButton.setTitleColor(.black, for: .normal)
+            plusButton.backgroundColor = .white
+            plusButton.layer.cornerRadius = 10
+            plusButton.layer.borderWidth = 1
+            plusButton.layer.borderColor = UIColor.black.cgColor
+            plusButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+            cell.contentView.addSubview(plusButton)
+            plusButton.snp.makeConstraints { make in
+                make.top.equalTo(cell.contentView.snp.top).offset(25)
+                make.right.equalTo(cell.contentView.snp.right).offset(-10)
+                make.width.equalTo(30)
+                make.height.equalTo(30)
+            }
+
+            // minus button
+            let minusButton = UIButton()
+            minusButton.setTitle("-", for: .normal)
+            minusButton.setTitleColor(.black, for: .normal)
+            minusButton.backgroundColor = .white
+            minusButton.layer.cornerRadius = 10
+            minusButton.layer.borderWidth = 1
+            minusButton.layer.borderColor = UIColor.black.cgColor
+            minusButton.addTarget(self, action: #selector(minusButtonTapped), for: .touchUpInside)
+            cell.contentView.addSubview(minusButton)
+            minusButton.snp.makeConstraints { make in
+                make.top.equalTo(cell.contentView.snp.top).offset(25)
+                make.right.equalTo(plusButton.snp.left).offset(-10)
+                make.width.equalTo(30)
+                make.height.equalTo(30)
+            }
+
+            // count label
+            let countLabel = UILabel()
+            countLabel.text = String(shoppingVM.shoppingCart[indexPath.row].quantity)
+            countLabel.textColor = .black
+            countLabel.backgroundColor = .white
+            countLabel.layer.cornerRadius = 10
+            countLabel.layer.borderWidth = 0
+            countLabel.textAlignment = .center
+            cell.contentView.addSubview(countLabel)
+            countLabel.snp.makeConstraints { make in
+                make.top.equalTo(cell.contentView.snp.top).offset(25)
+                make.right.equalTo(minusButton.snp.left).offset(-10)
+                make.width.equalTo(30)
+                make.height.equalTo(30)
+            }
+
+
+            return cell
+    }
 }

@@ -7,15 +7,28 @@
 
 import UIKit
 import Lottie
+import FirebaseAuth
 class LaunchViewController: UIViewController {
 
     // pazarama icon
     private let pazaramaImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "pazarama")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "pazarama2")
+        imageView.contentMode = .center
         return imageView
     }()
+    
+    func controlUser(){
+        if Auth.auth().currentUser != nil {
+            let tabBar = TabBarController()
+            tabBar.modalPresentationStyle = .fullScreen
+            present(tabBar, animated: true)
+        }else{
+            let login = LoginViewController()
+            login.modalPresentationStyle = .fullScreen
+            present(login, animated: true)
+        }
+    }
     
     var animationView = LottieAnimationView()
     override func viewDidLoad() {
@@ -37,11 +50,13 @@ class LaunchViewController: UIViewController {
         animationView.loopMode = .loop
         animationView.play()
         view.addSubview(animationView)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            let vc = TabBarController()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
-        }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        controlUser()
+    }
+    
+    
+    
 }

@@ -65,7 +65,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         appearance.backgroundColor = .systemBackground
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
-
+        self.navigationItem.compactAppearance = appearance
+        
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
         homeViewModal.getProducts()
