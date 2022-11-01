@@ -26,6 +26,7 @@
 		5441284229075E68000A6194 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5441284129075E68000A6194 /* loading.json */; };
 		5441284429075F36000A6194 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5441284329075F36000A6194 /* Launch.storyboard */; };
 		5470E417291080370064D7AD /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = 5470E416291080370064D7AD /* Drops */; };
+		5470E4192910919F0064D7AD /* HomeViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5470E4182910919F0064D7AD /* HomeViewModal.swift */; };
 		547829B22909F3A10082778C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 547829B12909F3A10082778C /* SnapKit */; };
 		547829B42909F9F20082778C /* ShoppingCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547829B32909F9F20082778C /* ShoppingCart.swift */; };
 		547829B72909FB690082778C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547829B62909FB690082778C /* LoginViewController.swift */; };
@@ -71,6 +72,7 @@
 		5441283F29075222000A6194 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		5441284129075E68000A6194 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		5441284329075F36000A6194 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
+		5470E4182910919F0064D7AD /* HomeViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModal.swift; sourceTree = "<group>"; };
 		547829B32909F9F20082778C /* ShoppingCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCart.swift; sourceTree = "<group>"; };
 		547829B62909FB690082778C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		547829B82909FB7B0082778C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -181,9 +183,9 @@
 		5441282529073CA2000A6194 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				54F0FB73290EC019007B75AD /* Components */,
+				5470E41A29109C220064D7AD /* Home */,
 				54E8639A290D555F00346D61 /* Views */,
-				54E86399290D54EF00346D61 /* Modal Views */,
+				54E86399290D54EF00346D61 /* ModalView */,
 				5441283B290750F0000A6194 /* Modals */,
 				5441282D29073CE6000A6194 /* ViewControllers */,
 			);
@@ -250,7 +252,6 @@
 				54205C6B290C7EA2000AB0C2 /* Category */,
 				54205C64290C6BE0000AB0C2 /* General */,
 				547829B52909FB4D0082778C /* User */,
-				5441281129073C98000A6194 /* HomeViewController.swift */,
 				5441283F29075222000A6194 /* ShoppingCartViewController.swift */,
 			);
 			path = ViewControllers;
@@ -266,6 +267,31 @@
 				54F0FB8D290F30D7007B75AD /* Order.swift */,
 			);
 			path = Modals;
+			sourceTree = "<group>";
+		};
+		5470E41A29109C220064D7AD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5470E41C29109C400064D7AD /* ViewModal */,
+				5470E41B29109C2F0064D7AD /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		5470E41B29109C2F0064D7AD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5441281129073C98000A6194 /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5470E41C29109C400064D7AD /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				5470E4182910919F0064D7AD /* HomeViewModal.swift */,
+			);
+			path = ViewModal;
 			sourceTree = "<group>";
 		};
 		547829B52909FB4D0082778C /* User */ = {
@@ -296,11 +322,11 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		54E86399290D54EF00346D61 /* Modal Views */ = {
+		54E86399290D54EF00346D61 /* ModalView */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Modal Views";
+			path = ModalView;
 			sourceTree = "<group>";
 		};
 		54E8639A290D555F00346D61 /* Views */ = {
@@ -336,13 +362,6 @@
 				54E863A0290D555F00346D61 /* ShoppingCartCell.swift */,
 			);
 			path = Cart;
-			sourceTree = "<group>";
-		};
-		54F0FB73290EC019007B75AD /* Components */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,6 +464,7 @@
 				54E863A3290D555F00346D61 /* ShoppingCartCell.swift in Sources */,
 				54F0FB83290F1932007B75AD /* User.swift in Sources */,
 				5441284029075222000A6194 /* ShoppingCartViewController.swift in Sources */,
+				5470E4192910919F0064D7AD /* HomeViewModal.swift in Sources */,
 				547829B72909FB690082778C /* LoginViewController.swift in Sources */,
 				54D84A8F2909E6C6009620AF /* UserDefaults+Extension.swift in Sources */,
 				5441283829074CF1000A6194 /* CategoryViewController.swift in Sources */,
