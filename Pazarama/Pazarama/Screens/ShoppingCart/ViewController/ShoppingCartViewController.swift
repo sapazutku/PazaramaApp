@@ -108,7 +108,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-10)
         }
 
-        showEmptyAnimation()
+        reloadData()
         
     }
 
@@ -211,14 +211,6 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         // edit character number
         cell.textLabel?.minimumScaleFactor = 0.5
         cell.textLabel?.text = (shoppingVM.shoppingCart[indexPath.row].title!.count > 20) ? "\(shoppingVM.shoppingCart[indexPath.row].title!.prefix(20))..." : shoppingVM.shoppingCart[indexPath.row].title
-        
-
-        
-
-        
-        
-
-        
         
         cell.detailTextLabel?.text = String(shoppingVM.shoppingCart[indexPath.row].price)
             // plus button
