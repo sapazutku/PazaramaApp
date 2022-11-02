@@ -126,7 +126,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
              let image = UIImage(data: data)
              self.profileImageView.image = image
          }
-         
     }
 
     public func getUser(){

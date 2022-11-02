@@ -127,6 +127,5 @@ class ProductCustomCell: UICollectionViewCell {
     @objc func addToCartAction() {
         Product.addProduct(product: product!)
         Drops.show(drop)
-
     }
 }

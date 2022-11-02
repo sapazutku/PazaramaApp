@@ -57,9 +57,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // navigation bar
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.backgroundColor = .systemBackground
+        /**
+         // navigation bar
+         navigationController?.navigationBar.isTranslucent = false
+         navigationController?.navigationBar.backgroundColor = .systemBackground
+         let appearance = UINavigationBarAppearance()
+         appearance.configureWithOpaqueBackground()
+         appearance.backgroundColor = .systemBackground
+         self.navigationItem.standardAppearance = appearance
+         self.navigationItem.scrollEdgeAppearance = appearance
+         self.navigationItem.compactAppearance = appearance
+         */
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .systemBackground
@@ -90,6 +98,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         scrollView.addSubview(allProductsCollectionView)
         configureUI()
     }
+    
+    // tabbar getting lost problem:
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
 
     func configureUI() {
         // scroll view
@@ -104,11 +118,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         collectionView.dataSource = self
 
         // all products title
-        allProductsTitle.frame = CGRect(x: 20, y: 480, width: view.frame.width - 40, height: 30)
+        allProductsTitle.frame = CGRect(x: 5, y: 480, width: view.frame.width - 40, height: 30)
 
         // all products collection view
         allProductsCollectionView.backgroundColor = .systemBackground
-        allProductsCollectionView.frame = CGRect(x: 20, y: 530, width: view.frame.width - 40, height: 400)
+        allProductsCollectionView.frame = CGRect(x: 20, y: 510, width: view.frame.width - 40, height: 400)
         allProductsCollectionView.delegate = self
         allProductsCollectionView.dataSource = self
     }
@@ -131,7 +145,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         } else {
             return homeViewModal.products.count ?? .zero
         }
+    }
 
+    // select item
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = DetailViewController()
+        if collectionView == self.collectionView {
+            vc.product = homeViewModal.popularProducts[indexPath.row]
+        } else {
+            vc.product = homeViewModal.products[indexPath.row]
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
