@@ -22,7 +22,7 @@ class WelcomeViewController: UIViewController{
         
         let firstPage = OnboardPage(title: " ", imageName: "pazarama", description: "Pazarama is an e-commerce app that you can find everything you need.")
         let secondPage = OnboardPage(title: " ", imageName: "ecommerce", description: "Find what you need from the comfort of your home between thousands of products.")
-        let thirdPage = OnboardPage(title: " ", imageName: "online", description: "Also, you can find travel and hotel deals.", actionButtonTitle: "Get Started", action: {_ in 
+        let thirdPage = OnboardPage(title: " ", imageName: "online", description: "Also, you can find travel and hotel deals.",advanceButtonTitle: "Go Back", actionButtonTitle: "Get Started", action: {_ in 
             // find login view controller and go
             Core.shared.setIsNotNewUser()
             let loginVC = LoginViewController()
