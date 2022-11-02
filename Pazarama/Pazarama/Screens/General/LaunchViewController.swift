@@ -18,17 +18,7 @@ class LaunchViewController: UIViewController {
         return imageView
     }()
     
-    func controlUser(){
-        if Auth.auth().currentUser != nil {
-            let tabBar = TabBarController()
-            tabBar.modalPresentationStyle = .fullScreen
-            present(tabBar, animated: true)
-        }else{
-            let login = LoginViewController()
-            login.modalPresentationStyle = .fullScreen
-            present(login, animated: true)
-        }
-    }
+
     
     var animationView = LottieAnimationView()
     override func viewDidLoad() {
@@ -56,7 +46,46 @@ class LaunchViewController: UIViewController {
         super.viewDidAppear(animated)
         controlUser()
     }
+
+    func controlUser(){
+        if Auth.auth().currentUser != nil {
+            // user is logged in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                let vc = TabBarController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+        }
+        else if Core.shared.isNewUser() {
+            // user is not logged in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                let vc = WelcomeViewController()
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true)
+            }
+        }
+        else {
+            // user is not logged in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                let login = LoginViewController()
+                login.modalPresentationStyle = .fullScreen
+                self.present(login, animated: true)
+            }
+        }
+    }
     
-    
-    
+}
+
+class Core {
+    static let shared = Core()
+
+    func isNewUser() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "isNewUser")
+    }
+
+    func setIsNotNewUser() {
+        UserDefaults.standard.set(true, forKey: "isNewUser")
+    }
+
+
 }
