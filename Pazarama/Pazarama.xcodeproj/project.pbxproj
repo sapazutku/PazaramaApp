@@ -45,6 +45,7 @@
 		54CBFDA12911C5E30034321F /* ShoppingCartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CBFDA02911C5E30034321F /* ShoppingCartViewModel.swift */; };
 		54CBFDA62911DE1D0034321F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CBFDA52911DE1D0034321F /* DetailViewController.swift */; };
 		54CBFDAB2911F2AB0034321F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CBFDAA2911F2AB0034321F /* WelcomeViewController.swift */; };
+		54CBFDAE2911F7720034321F /* OnboardKit in Frameworks */ = {isa = PBXBuildFile; productRef = 54CBFDAD2911F7720034321F /* OnboardKit */; };
 		54D84A8F2909E6C6009620AF /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D84A8E2909E6C6009620AF /* UserDefaults+Extension.swift */; };
 		54E863A1290D555F00346D61 /* ProductCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8639C290D555F00346D61 /* ProductCustomCell.swift */; };
 		54E863A2290D555F00346D61 /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8639E290D555F00346D61 /* CategoryCollectionViewCell.swift */; };
@@ -118,6 +119,7 @@
 				54F0FB8A290F308E007B75AD /* FirebaseRemoteConfig in Frameworks */,
 				54B1D0AE29084A64008864B9 /* Moya in Frameworks */,
 				54F0FB8C290F308E007B75AD /* FirebaseStorage in Frameworks */,
+				54CBFDAE2911F7720034321F /* OnboardKit in Frameworks */,
 				544128322907466D000A6194 /* Lottie in Frameworks */,
 				54F0FB88290F308E007B75AD /* FirebaseFirestore in Frameworks */,
 			);
@@ -538,6 +540,7 @@
 				54F0FB89290F308E007B75AD /* FirebaseRemoteConfig */,
 				54F0FB8B290F308E007B75AD /* FirebaseStorage */,
 				5470E416291080370064D7AD /* Drops */,
+				54CBFDAD2911F7720034321F /* OnboardKit */,
 			);
 			productName = Pazarama;
 			productReference = 5441280A29073C98000A6194 /* Pazarama.app */;
@@ -574,6 +577,7 @@
 				547829BA2909FD3E0082778C /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				54F0FB84290F308E007B75AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5470E415291080370064D7AD /* XCRemoteSwiftPackageReference "Drops" */,
+				54CBFDAC2911F7720034321F /* XCRemoteSwiftPackageReference "OnboardKit" */,
 			);
 			productRefGroup = 5441280B29073C98000A6194 /* Products */;
 			projectDirPath = "";
@@ -890,6 +894,14 @@
 				kind = branch;
 			};
 		};
+		54CBFDAC2911F7720034321F /* XCRemoteSwiftPackageReference "OnboardKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NikolaKirev/OnboardKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		54F0FB84290F308E007B75AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -925,6 +937,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54B1D0AC29084A64008864B9 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		54CBFDAD2911F7720034321F /* OnboardKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54CBFDAC2911F7720034321F /* XCRemoteSwiftPackageReference "OnboardKit" */;
+			productName = OnboardKit;
 		};
 		54F0FB85290F308E007B75AD /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
