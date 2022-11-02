@@ -160,14 +160,16 @@ class LoginViewController: UIViewController {
       
       FirebaseAuth.Auth.auth().signIn(withEmail: emailTextField, password: password, completion: {result, error in
           if (error != nil) {
-              let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-              alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-              self.present(alert, animated: true)
-              return
+            let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            return
           }
           else{
-              Drops.show(Drop(title: "Welcome", subtitle: "You are logged in", icon: UIImage(systemName: "figure.wave")))
-              self.navigationController?.pushViewController(TabBarController(), animated: true)
+            Drops.show(Drop(title: "Welcome", subtitle: "You are logged in", icon: UIImage(systemName: "figure.wave")))
+            let vc = TabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
               
           }
       })

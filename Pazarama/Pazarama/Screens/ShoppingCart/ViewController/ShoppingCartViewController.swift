@@ -203,12 +203,16 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! UITableViewCell
-        cell.textLabel?.text = shoppingVM.shoppingCart[indexPath.row].title
+        
         cell.textLabel?.lineBreakMode = .byTruncatingTail
         // prevent text overflow
         cell.textLabel?.numberOfLines = 1
         //cell.textLabel?.adjustsFontSizeToFitWidth = true
-        cell.textLabel?.lineBreakMode = .byTruncatingTail
+        // edit character number
+        cell.textLabel?.minimumScaleFactor = 0.5
+        cell.textLabel?.text = (shoppingVM.shoppingCart[indexPath.row].title!.count > 20) ? "\(shoppingVM.shoppingCart[indexPath.row].title!.prefix(20))..." : shoppingVM.shoppingCart[indexPath.row].title
+        
+
         
 
         
