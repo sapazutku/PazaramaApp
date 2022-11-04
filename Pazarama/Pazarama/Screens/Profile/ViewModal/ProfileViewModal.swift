@@ -12,7 +12,7 @@ import FirebaseFirestore
 import FirebaseStorage
 
 class ProfileViewModal{
-    let settingsArray = ["Upload Profile Photo", "Change Username", "Change Email", "Change Password", "My Orders", "About App"]
+    let settingsArray = ["Upload Profile Photo", "Change Username", "Change Email", "Change Password", "About App"]
 
     // user info
     var user: User?

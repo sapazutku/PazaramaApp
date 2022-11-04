@@ -111,10 +111,7 @@ class ProductCustomCell: UICollectionViewCell {
         contentView.addSubview(addToCart)
         addToCart.frame = CGRect(x: 20, y: 250, width: 120, height: 30)
 
-        // cell border
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.lightGray.cgColor
-        contentView.layer.cornerRadius = 12
+        
         
 
     }
