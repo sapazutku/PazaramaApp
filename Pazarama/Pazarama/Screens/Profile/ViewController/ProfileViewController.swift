@@ -162,12 +162,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 1:
             changeUsername()
         case 2:
-            changePassword()
-        case 3:
             changeEmail()
+        case 3:
+            changePassword()
         case 4:
-            goToOrders()
-        case 5:
             about()
         default:
             print("Error")
@@ -255,10 +253,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func goToOrders(){
-       
-    }
+
 
     func about() {
         let alert = UIAlertController(title: "About", message: "Pazarama App is final project of Pazarama iOS Bootcamp, made by Utku Sapaz.`https://github.com/sapazutku/PazaramaApp`", preferredStyle: .alert)

@@ -35,4 +35,6 @@ class ShoppingCartViewModel{
         }
         return Double(totalPrice)
     }
+
+    
 }
