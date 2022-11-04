@@ -136,6 +136,15 @@
       }
     },
     {
+      "identity" : "onboardkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/NikolaKirev/OnboardKit.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "bcf46e78fa0e41d754381cc928dcdf190f8f919c"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",

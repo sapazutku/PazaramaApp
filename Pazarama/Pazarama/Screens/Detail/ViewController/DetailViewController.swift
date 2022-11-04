@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
-
+import Drops
 class DetailViewController: UIViewController {
     // MARK: - Properties
 
@@ -138,5 +138,6 @@ class DetailViewController: UIViewController {
     // MARK: - Actions
     @objc func addToCartButtonTapped(_ sender: Any) {
         Product.addProduct(product: product!)
+        Drops.show(Drop(title: "Added to Cart", subtitle: "\(product!.title) added to cart", icon: UIImage(systemName: "cart.fill")!, duration: .seconds(2)))
     }
 }
