@@ -8,33 +8,36 @@
 import Foundation
 
 extension UserDefaults {
-    func getProducts() -> [Product] {
-        guard let data = data(forKey: "products") else { return [] }
-        let decoder = JSONDecoder()
-        guard let products = try? decoder.decode([Product].self, from: data) else { return [] }
-        return products
+    // user profile photo
+    static let profilePhoto = "profilePhoto"
+    func getProfilePhoto() -> Data? {
+        return data(forKey: UserDefaults.profilePhoto)
+    }
+
+    func setProfilePhoto(data: Data) {
+        set(data, forKey: UserDefaults.profilePhoto)
+    }
+
+    // user name
+
+    static let userName = "userName"
+    func getUserName() -> String? {
+        return string(forKey: UserDefaults.userName)
+    }
+
+    func setUserName(name: String) {
+        set(name, forKey: UserDefaults.userName)
+    }
+
+    // user email
+
+    static let userEmail = "userEmail"
+    func getUserEmail() -> String? {
+        return string(forKey: UserDefaults.userEmail)
+    }
+
+    func setUserEmail(email: String) {
+        set(email, forKey: UserDefaults.userEmail)
     }
     
-    func setProducts(products: [Product]) {
-        let encoder = JSONEncoder()
-        guard let data = try? encoder.encode(products) else { return }
-        set(data, forKey: "products")
-    }
-    
-    func addProduct(product: Product) {
-        var products = getProducts()
-        products.append(product)
-        setProducts(products: products)
-    }
-    
-    func deleteProduct(product: Product) {
-        var products = getProducts()
-        products.removeAll { $0.id == product.id }
-        setProducts(products: products)
-    }
-    
-    func isProductExist(product: Product) -> Bool {
-        var products = getProducts()
-        return products.contains { $0.id == product.id }
-    }
 }
