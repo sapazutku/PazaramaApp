@@ -78,17 +78,10 @@ class LoginViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        controlUser()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchRemote()
         configureUI()
-        //controlRemote()
-        fetchRemote()
     }
 
     
@@ -206,14 +199,5 @@ class LoginViewController: UIViewController {
         let controller = RegisterViewController()
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
-    }
-    
-    
-    func controlUser(){
-        if Auth.auth().currentUser != nil {
-            let tabBar = TabBarController()
-            tabBar.modalPresentationStyle = .fullScreen
-            present(tabBar, animated: true)
-        }
     }
 }
