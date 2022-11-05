@@ -11,12 +11,16 @@ import Lottie
 import FirebaseFirestore
 import FirebaseAuth
 import Drops
+import FirebaseRemoteConfig
+
 class LoginViewController: UIViewController {
     
     // MARK: - Properties
     
-
-
+    private let remoteConfig = RemoteConfig.remoteConfig()
+    
+    private let loginViewModal = LoginViewModal()
+    
     private var animationView = LottieAnimationView()
     
     private let logoImageView: UIImageView = {
@@ -74,14 +78,9 @@ class LoginViewController: UIViewController {
 
     // MARK: - Lifecycle
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        controlUser()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        //fetchRemote()
+        fetchRemote()
         configureUI()
     }
 
@@ -133,12 +132,32 @@ class LoginViewController: UIViewController {
         view.sendSubviewToBack(animationView)
     }
     // MARK: - Methods
-    
+  
+    func fetchRemote(){
+        let defaults:[String:NSObject] = ["sign_up_available" : true as NSObject]
+
+        remoteConfig.setDefaults(defaults)
+        let settings = RemoteConfigSettings()
+        settings.minimumFetchInterval = 0
+        remoteConfig.configSettings = settings
+
+        self.remoteConfig.fetch(withExpirationDuration: 0, completionHandler: { (status, error) in
+            if status == .success {
+                self.updateSignUp(value: status.rawValue)
+            }
+            else {
+                print("Error: \(error?.localizedDescription ?? "No error available.")")
+            }
+        
+    })
+    }
+
     func updateSignUp(value:Int){
         if value == 1{
             self.dontHaveAccountButton.isHidden = false
         } else {
             self.dontHaveAccountButton.isHidden = true
+            
         }
     }
 
@@ -181,15 +200,4 @@ class LoginViewController: UIViewController {
         controller.modalPresentationStyle = .fullScreen
         present(controller, animated: true, completion: nil)
     }
-    
-    
-    func controlUser(){
-        if Auth.auth().currentUser != nil {
-            let tabBar = TabBarController()
-            tabBar.modalPresentationStyle = .fullScreen
-            present(tabBar, animated: true)
-        }
-    }
-
-
 }

@@ -128,6 +128,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
          }
     }
 
+    // get user from Firebase
     public func getUser(){
         // get user info from Firestore
         guard let uid = Auth.auth().currentUser?.uid else { return }
