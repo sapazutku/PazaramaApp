@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
     
     private let remoteConfig = RemoteConfig.remoteConfig()
     
-    private let loginViewModal = LoginViewModal()
     
     private var animationView = LottieAnimationView()
     
@@ -134,30 +133,32 @@ class LoginViewController: UIViewController {
     // MARK: - Methods
   
     func fetchRemote(){
-        let defaults:[String:NSObject] = ["sign_up_available" : true as NSObject]
-
-        remoteConfig.setDefaults(defaults)
         let settings = RemoteConfigSettings()
         settings.minimumFetchInterval = 0
         remoteConfig.configSettings = settings
-
-        self.remoteConfig.fetch(withExpirationDuration: 0, completionHandler: { (status, error) in
+        remoteConfig.fetch { status, error in
             if status == .success {
-                self.updateSignUp(value: status.rawValue)
-            }
-            else {
+                print("Config fetched!")
+                self.remoteConfig.activate { _, _ in
+                    let isAvailable = self.remoteConfig["sign_up_available"].boolValue
+                    self.updateSignUp(isAvailable: isAvailable)
+                    print(isAvailable)
+                }
+            } else {
+                print("Config not fetched")
                 print("Error: \(error?.localizedDescription ?? "No error available.")")
             }
-        
-    })
+        }
+
     }
 
-    func updateSignUp(value:Int){
-        if value == 1{
+    func updateSignUp(isAvailable:Bool){
+        if isAvailable{
             self.dontHaveAccountButton.isHidden = false
+            print("not hidden")
         } else {
             self.dontHaveAccountButton.isHidden = true
-            
+            print("hidden")
         }
     }
 

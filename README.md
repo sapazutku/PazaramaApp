@@ -1,8 +1,15 @@
 <h1 align="center" id="title">Pazarama App</h1>
 
+<p align="center"><img src="https://img.shields.io/static/v1?label=test&amp;message=3&amp;color=green" alt="shields"><img src="https://img.shields.io/static/v1?label=licence>&amp;message=MIT&amp;color=<COLOR>" alt="shields"><img src="https://img.shields.io/badge/platform-ios-gray" alt="shields"></p>
+
 <p align="center"><img src="https://global-uploads.webflow.com/6097e0eca1e875de53031ff6/61b9b28acbf4d14f8b0fbe90_pazarama%20logo.png" alt="project-image"></p>
 
-<p id="description">Pazarama App is the final project of Pazarama iOS Bootcamp. It is an e-commerce application with registration and login processes.</p>
+<p id="description">Pazarama App is the final project of Pazarama iOS Bootcamp. It is an e-commerce application with registration and login processes with Firebase. After logging, users can add products to the shopping cart which is created with Core Data. There are onboarding, login, registration, homepage, categories, shopping cart, profile and product detail pages in Pazarama App.  </p>
+
+<h2>Project Video:</h2>
+
+https://user-images.githubusercontent.com/64533036/200201475-61a8f303-bb93-4517-81b0-95641356208a.mov
+
 
 <h2>Project Screenshots:</h2>
 
@@ -30,8 +37,9 @@
 Here're some of the project's best features:
 
 *   Swift
+*   UIKit
 *   SPM
-*   Firebase
+*   Firebase - Auth, Firestore, RemoteConfig
 *   MVVM
 
   
