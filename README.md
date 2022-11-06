@@ -1,6 +1,6 @@
 <h1 align="center" id="title">Pazarama App</h1>
 
-<p align="center"><img src="https://img.shields.io/static/v1?label=test&amp;message=3&amp;color=green" alt="shields"><img src="https://img.shields.io/static/v1?label=licence>&amp;message=MIT&amp;color=<COLOR>" alt="shields"><img src="https://img.shields.io/badge/platform-ios-gray" alt="shields"></p>
+<p align="center"><img src="https://img.shields.io/static/v1?label=test&amp;message=3&amp;color=green" alt="shields"><img src="https://img.shields.io/static/v1?label=licence>&amp;message=MIT&amp;color=orange" alt="shields"><img src="https://img.shields.io/badge/platform-ios-gray" alt="shields"></p>
 
 <p align="center"><img src="https://global-uploads.webflow.com/6097e0eca1e875de53031ff6/61b9b28acbf4d14f8b0fbe90_pazarama%20logo.png" alt="project-image"></p>
 
